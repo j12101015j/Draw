@@ -1,0 +1,9 @@
+streamlit
+opencv-python-headless
+numpy
+pandas
+scikit-image
+scipy
+ultralytics
+Pillow
+openpyxl

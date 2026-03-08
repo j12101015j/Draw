@@ -1,0 +1,4 @@
+﻿圖片名,動態事物種類及數量,靜態事物種類及數量,動態/靜態+動態占比,事物動態性
+1.jpg,None,None,0.0,None
+10.jpg,None,"tree: 4, grass: 3, sun: 1",0.0,1
+2xg2-1.JPG,person: 5,"house: 1, sun: 1, cloud: 2",0.556,10
