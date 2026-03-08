@@ -1,4 +1,27 @@
 ﻿圖片名,動態事物種類及數量,靜態事物種類及數量,動態/靜態+動態占比,事物動態性
 1.jpg,None,None,0.0,None
 10.jpg,None,"tree: 4, grass: 3, sun: 1",0.0,1
+11.jpg,person: 2,star: 6,0.25,3
+12.JPG,None,cloud: 2,0.0,1
+14.jpg,None,"house: 1, cloud: 1, tree: 1",0.0,1
+1pg06.JPG,person: 1,"house: 4, sun: 1",0.167,2
+1pg09-1.JPG,person: 3,"cloud: 2, sun: 1, house: 1",0.429,9
+1pg09-2.JPG,person: 1,"cloud: 2, house: 2, sun: 1",0.167,2
+1pg13-1.JPG,person: 2,house: 2,0.5,10
+1pg14-2.JPG,None,house: 1,0.0,1
+1xg1-2.JPG,None,grass: 1,0.0,1
+2.jpg,None,None,0.0,None
+2xg1.JPG,person: 1,"sun: 1, tree: 1",0.333,8
 2xg2-1.JPG,person: 5,"house: 1, sun: 1, cloud: 2",0.556,10
+2xg2-2.JPG,person: 2,"star: 1, house: 1",0.5,10
+2xg3.JPG,None,grass: 1,0.0,1
+2xg4.JPG,None,star: 1,0.0,1
+2xg5.JPG,None,"sun: 1, grass: 1",0.0,1
+2xg6.JPG,person: 1,flower: 1,0.5,10
+2xg7.JPG,None,"house: 1, flower: 1",0.0,1
+2xg8.JPG,butterflies: 2,cloud: 3,0.4,9
+2xg9.JPG,person: 1,flower: 1,0.5,10
+a.jpg,None,None,0.0,None
+b.jpg,None,star: 1,0.0,1
+c.jpg,None,star: 1,0.0,1
+d.jpg,None,star: 1,0.0,1

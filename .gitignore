@@ -179,3 +179,11 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+# --- 以下是地端資料夾，不會上傳 ---
+temp_web_output/
+圖片/
+图像识别需求表（20251226）.xlsx
+stroke_palette_v8_15_6.py
+resizeNNI.py
+stroke_palette_v8_15_6.py

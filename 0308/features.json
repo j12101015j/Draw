@@ -226,16 +226,16 @@
         "content": "Done",
         "content_size": {
             "individual_areas": {
-                "tree1": 239375.5625,
-                "tree2": 230263.421875,
-                "tree3": 252122.015625,
+                "tree1": 239368.859375,
+                "tree2": 230236.1875,
+                "tree3": 252151.859375,
                 "tree4": 226343.015625,
                 "grass1": 733898.75,
-                "grass2": 111381.484375,
+                "grass2": 111396.46875,
                 "sun1": 221026.671875,
-                "grass3": 844363.0625
+                "grass3": 844340.375
             },
-            "total_box_area": 2858774.0,
+            "total_box_area": 2858762.25,
             "paper_area": 2151456
         },
         "dynamic": {
@@ -252,6 +252,1380 @@
         },
         "skeleton": {
             "skeleton_pixels": 14806
+        }
+    },
+    "11.jpg": {
+        "paper_orientation": {
+            "height": 1183,
+            "width": 1752,
+            "desc": "1=縱向, 2=橫向"
+        },
+        "curvature": {
+            "corners_count": 19,
+            "arcs_count": 173
+        },
+        "line_smoothness": {
+            "break_count": 0,
+            "break_ratio": 0.0,
+            "fluency_level": 3
+        },
+        "line_thickness": {
+            "thickness_px": 10.4,
+            "red_ratio": 0.889109704836786,
+            "level": 2
+        },
+        "drawing_colors": {
+            "colors": [
+                {
+                    "name": "灰色 (Gray)",
+                    "rgb": [
+                        136,
+                        136,
+                        128
+                    ],
+                    "prop": 0.5932
+                },
+                {
+                    "name": "暗灰色 (Dim Gray)",
+                    "rgb": [
+                        136,
+                        80,
+                        96
+                    ],
+                    "prop": 0.2724
+                },
+                {
+                    "name": "暗灰色 (Dim Gray)",
+                    "rgb": [
+                        80,
+                        48,
+                        64
+                    ],
+                    "prop": 0.0456
+                },
+                {
+                    "name": "森林綠 (Forest Green)",
+                    "rgb": [
+                        32,
+                        88,
+                        32
+                    ],
+                    "prop": 0.0422
+                },
+                {
+                    "name": "暗灰色 (Dim Gray)",
+                    "rgb": [
+                        88,
+                        72,
+                        104
+                    ],
+                    "prop": 0.0283
+                },
+                {
+                    "name": "暗灰色 (Dim Gray)",
+                    "rgb": [
+                        88,
+                        64,
+                        88
+                    ],
+                    "prop": 0.0069
+                },
+                {
+                    "name": "暗灰色 (Dim Gray)",
+                    "rgb": [
+                        144,
+                        80,
+                        104
+                    ],
+                    "prop": 0.0057
+                },
+                {
+                    "name": "栗色/酒紅 (Maroon)",
+                    "rgb": [
+                        72,
+                        24,
+                        32
+                    ],
+                    "prop": 0.0052
+                },
+                {
+                    "name": "黑色 (Black)",
+                    "rgb": [
+                        56,
+                        48,
+                        40
+                    ],
+                    "prop": 0.0005
+                }
+            ]
+        },
+        "shadow_area_ratio": {
+            "shadow_paint_area": 1264124,
+            "binary_pixel_area": 1288155
+        },
+        "shadow_region_count": {
+            "region_count": 5,
+            "paint_area": 1264124
+        },
+        "drawing_region_3x3": {
+            "region_counts": {
+                "A1": 16517,
+                "A2": 19976,
+                "A3": 16730,
+                "B1": 196220,
+                "B2": 178739,
+                "B3": 167933,
+                "C1": 230680,
+                "C2": 230680,
+                "C3": 230680
+            },
+            "main_region": "C1/C2/C3",
+            "covered_regions": [
+                "A1",
+                "A2",
+                "A3",
+                "B1",
+                "B2",
+                "B3",
+                "C1",
+                "C2",
+                "C3"
+            ]
+        },
+        "drawing_area_ratio": {
+            "topo_drawing_area": 1300214,
+            "paper_area": 2072616
+        },
+        "stroke_depth": {
+            "mean_gray": 137.91
+        },
+        "content": "Done",
+        "content_size": {
+            "individual_areas": {
+                "star1": 13936.6259765625,
+                "star2": 15443.310546875,
+                "star3": 14892.6767578125,
+                "star4": 14273.8828125,
+                "star5": 12826.3740234375,
+                "star6": 13168.9921875,
+                "person1": 79889.6875,
+                "person2": 472524.21875
+            },
+            "total_box_area": 636955.75,
+            "paper_area": 2072616
+        },
+        "dynamic": {
+            "dynamic_str": "person: 2",
+            "static_str": "star: 6",
+            "ratio": 0.25,
+            "score": 3
+        },
+        "mood": null,
+        "word": null,
+        "mask": {
+            "drawing_pixels": 1303864,
+            "paper_pixels": 2072616
+        },
+        "skeleton": {
+            "skeleton_pixels": 23187
+        }
+    },
+    "12.JPG": {
+        "paper_orientation": {
+            "height": 1752,
+            "width": 1206,
+            "desc": "1=縱向, 2=橫向"
+        },
+        "curvature": {
+            "corners_count": 0,
+            "arcs_count": 124
+        },
+        "line_smoothness": {
+            "break_count": 0,
+            "break_ratio": 0.0,
+            "fluency_level": 3
+        },
+        "line_thickness": {
+            "thickness_px": 10.4,
+            "red_ratio": 0.8753963723997971,
+            "level": 2
+        },
+        "drawing_colors": {
+            "colors": [
+                {
+                    "name": "灰色 (Gray)",
+                    "rgb": [
+                        136,
+                        136,
+                        128
+                    ],
+                    "prop": 1.0
+                }
+            ]
+        },
+        "shadow_area_ratio": {
+            "shadow_paint_area": 1240929,
+            "binary_pixel_area": 1245345
+        },
+        "shadow_region_count": {
+            "region_count": 4,
+            "paint_area": 1240929
+        },
+        "drawing_region_3x3": {
+            "region_counts": {
+                "A1": 234768,
+                "A2": 172874,
+                "A3": 9343,
+                "B1": 234768,
+                "B2": 161061,
+                "B3": 2051,
+                "C1": 234768,
+                "C2": 193460,
+                "C3": 2252
+            },
+            "main_region": "A1/B1/C1",
+            "covered_regions": [
+                "A1",
+                "A2",
+                "A3",
+                "B1",
+                "B2",
+                "B3",
+                "C1",
+                "C2",
+                "C3"
+            ]
+        },
+        "drawing_area_ratio": {
+            "topo_drawing_area": 1316679,
+            "paper_area": 2112912
+        },
+        "stroke_depth": {
+            "mean_gray": 148.63
+        },
+        "content": "Done",
+        "content_size": {
+            "individual_areas": {
+                "cloud1": 141422.4375,
+                "cloud2": 127917.125
+            },
+            "total_box_area": 269339.5625,
+            "paper_area": 2112912
+        },
+        "dynamic": {
+            "dynamic_str": "None",
+            "static_str": "cloud: 2",
+            "ratio": 0.0,
+            "score": 1
+        },
+        "mood": null,
+        "word": null,
+        "mask": {
+            "drawing_pixels": 1244862,
+            "paper_pixels": 2112912
+        },
+        "skeleton": {
+            "skeleton_pixels": 27359
+        }
+    },
+    "14.jpg": {
+        "paper_orientation": {
+            "height": 1211,
+            "width": 1752,
+            "desc": "1=縱向, 2=橫向"
+        },
+        "curvature": {
+            "corners_count": 12,
+            "arcs_count": 79
+        },
+        "line_smoothness": {
+            "break_count": 4,
+            "break_ratio": 0.1550327686410288,
+            "fluency_level": 3
+        },
+        "line_thickness": {
+            "thickness_px": 10.4,
+            "red_ratio": 0.9627341078168539,
+            "level": 2
+        },
+        "drawing_colors": {
+            "colors": [
+                {
+                    "name": "實木棕 (Burly Wood)",
+                    "rgb": [
+                        184,
+                        176,
+                        136
+                    ],
+                    "prop": 0.8744
+                },
+                {
+                    "name": "灰色 (Gray)",
+                    "rgb": [
+                        144,
+                        136,
+                        120
+                    ],
+                    "prop": 0.0784
+                },
+                {
+                    "name": "灰色 (Gray)",
+                    "rgb": [
+                        152,
+                        136,
+                        128
+                    ],
+                    "prop": 0.0472
+                }
+            ]
+        },
+        "shadow_area_ratio": {
+            "shadow_paint_area": 184342,
+            "binary_pixel_area": 224489
+        },
+        "shadow_region_count": {
+            "region_count": 1,
+            "paint_area": 184342
+        },
+        "drawing_region_3x3": {
+            "region_counts": {
+                "A1": 8601,
+                "A2": 15731,
+                "A3": 67699,
+                "B1": 6371,
+                "B2": 8103,
+                "B3": 40166,
+                "C1": 9260,
+                "C2": 18682,
+                "C3": 49876
+            },
+            "main_region": "A3",
+            "covered_regions": [
+                "A1",
+                "A2",
+                "A3",
+                "B1",
+                "B2",
+                "B3",
+                "C1",
+                "C2",
+                "C3"
+            ]
+        },
+        "drawing_area_ratio": {
+            "topo_drawing_area": 235437,
+            "paper_area": 2121672
+        },
+        "stroke_depth": {
+            "mean_gray": 175.0
+        },
+        "content": "Done",
+        "content_size": {
+            "individual_areas": {
+                "house1": 707144.6875,
+                "cloud1": 21113.015625,
+                "tree1": 583872.625
+            },
+            "total_box_area": 1312130.25,
+            "paper_area": 2121672
+        },
+        "dynamic": {
+            "dynamic_str": "None",
+            "static_str": "house: 1, cloud: 1, tree: 1",
+            "ratio": 0.0,
+            "score": 1
+        },
+        "mood": null,
+        "word": null,
+        "mask": {
+            "drawing_pixels": 309509,
+            "paper_pixels": 2121672
+        },
+        "skeleton": {
+            "skeleton_pixels": 17210
+        }
+    },
+    "1pg06.JPG": {
+        "paper_orientation": {
+            "height": 1240,
+            "width": 1752,
+            "desc": "1=縱向, 2=橫向"
+        },
+        "curvature": {
+            "corners_count": 153,
+            "arcs_count": 107
+        },
+        "line_smoothness": {
+            "break_count": 0,
+            "break_ratio": 0.0,
+            "fluency_level": 3
+        },
+        "line_thickness": {
+            "thickness_px": 10.79,
+            "red_ratio": 0.0,
+            "level": 2
+        },
+        "drawing_colors": {
+            "colors": [
+                {
+                    "name": "天藍色 (Sky Blue)",
+                    "rgb": [
+                        104,
+                        216,
+                        248
+                    ],
+                    "prop": 1.0
+                }
+            ]
+        },
+        "shadow_area_ratio": {
+            "shadow_paint_area": 0,
+            "binary_pixel_area": 274819
+        },
+        "shadow_region_count": {
+            "region_count": 0,
+            "paint_area": 0
+        },
+        "drawing_region_3x3": {
+            "region_counts": {
+                "A1": 10383,
+                "A2": 25455,
+                "A3": 19644,
+                "B1": 50631,
+                "B2": 47570,
+                "B3": 26072,
+                "C1": 42113,
+                "C2": 28247,
+                "C3": 24704
+            },
+            "main_region": "B1",
+            "covered_regions": [
+                "A1",
+                "A2",
+                "A3",
+                "B1",
+                "B2",
+                "B3",
+                "C1",
+                "C2",
+                "C3"
+            ]
+        },
+        "drawing_area_ratio": {
+            "topo_drawing_area": 677309,
+            "paper_area": 2172480
+        },
+        "stroke_depth": {
+            "mean_gray": 190.41
+        },
+        "content": "Done",
+        "content_size": {
+            "individual_areas": {
+                "house1": 255848.75,
+                "house2": 408984.0,
+                "sun1": 43542.5390625,
+                "house3": 185712.40625,
+                "house4": 237628.640625,
+                "person1": 573962.0625
+            },
+            "total_box_area": 1705678.5,
+            "paper_area": 2172480
+        },
+        "dynamic": {
+            "dynamic_str": "person: 1",
+            "static_str": "house: 4, sun: 1",
+            "ratio": 0.167,
+            "score": 2
+        },
+        "mood": null,
+        "word": null,
+        "mask": {
+            "drawing_pixels": 286908,
+            "paper_pixels": 2172480
+        },
+        "skeleton": {
+            "skeleton_pixels": 23594
+        }
+    },
+    "1pg09-1.JPG": {
+        "paper_orientation": {
+            "height": 1240,
+            "width": 1752,
+            "desc": "1=縱向, 2=橫向"
+        },
+        "curvature": {
+            "corners_count": 148,
+            "arcs_count": 123
+        },
+        "line_smoothness": {
+            "break_count": 1,
+            "break_ratio": 0.012212735227900258,
+            "fluency_level": 3
+        },
+        "line_thickness": {
+            "thickness_px": 8.79,
+            "red_ratio": 0.0,
+            "level": 2
+        },
+        "drawing_colors": {
+            "colors": [
+                {
+                    "name": "鮭魚紅 (Salmon)",
+                    "rgb": [
+                        208,
+                        112,
+                        128
+                    ],
+                    "prop": 1.0
+                }
+            ]
+        },
+        "shadow_area_ratio": {
+            "shadow_paint_area": 0,
+            "binary_pixel_area": 144132
+        },
+        "shadow_region_count": {
+            "region_count": 0,
+            "paint_area": 0
+        },
+        "drawing_region_3x3": {
+            "region_counts": {
+                "A1": 0,
+                "A2": 28660,
+                "A3": 11490,
+                "B1": 0,
+                "B2": 29701,
+                "B3": 0,
+                "C1": 4361,
+                "C2": 41288,
+                "C3": 28632
+            },
+            "main_region": "C2",
+            "covered_regions": [
+                "A2",
+                "A3",
+                "B2",
+                "C1",
+                "C2",
+                "C3"
+            ]
+        },
+        "drawing_area_ratio": {
+            "topo_drawing_area": 239318,
+            "paper_area": 2172480
+        },
+        "stroke_depth": {
+            "mean_gray": 150.33
+        },
+        "content": "Done",
+        "content_size": {
+            "individual_areas": {
+                "cloud1": 39924.63671875,
+                "sun1": 22347.51953125,
+                "person1": 30411.724609375,
+                "person2": 59352.9765625,
+                "person3": 28276.544921875,
+                "house1": 345044.21875,
+                "cloud2": 13417.65234375
+            },
+            "total_box_area": 538775.25,
+            "paper_area": 2172480
+        },
+        "dynamic": {
+            "dynamic_str": "person: 3",
+            "static_str": "cloud: 2, sun: 1, house: 1",
+            "ratio": 0.429,
+            "score": 9
+        },
+        "mood": null,
+        "word": null,
+        "mask": {
+            "drawing_pixels": 148820,
+            "paper_pixels": 2172480
+        },
+        "skeleton": {
+            "skeleton_pixels": 14765
+        }
+    },
+    "1pg09-2.JPG": {
+        "paper_orientation": {
+            "height": 1240,
+            "width": 1752,
+            "desc": "1=縱向, 2=橫向"
+        },
+        "curvature": {
+            "corners_count": 64,
+            "arcs_count": 52
+        },
+        "line_smoothness": {
+            "break_count": 0,
+            "break_ratio": 0.0,
+            "fluency_level": 3
+        },
+        "line_thickness": {
+            "thickness_px": 8.0,
+            "red_ratio": 0.0,
+            "level": 2
+        },
+        "drawing_colors": {
+            "colors": [
+                {
+                    "name": "鮭魚紅 (Salmon)",
+                    "rgb": [
+                        208,
+                        104,
+                        128
+                    ],
+                    "prop": 1.0
+                }
+            ]
+        },
+        "shadow_area_ratio": {
+            "shadow_paint_area": 0,
+            "binary_pixel_area": 82252
+        },
+        "shadow_region_count": {
+            "region_count": 0,
+            "paint_area": 0
+        },
+        "drawing_region_3x3": {
+            "region_counts": {
+                "A1": 125,
+                "A2": 20131,
+                "A3": 0,
+                "B1": 2633,
+                "B2": 28786,
+                "B3": 354,
+                "C1": 6217,
+                "C2": 16198,
+                "C3": 7808
+            },
+            "main_region": "B2",
+            "covered_regions": [
+                "A1",
+                "A2",
+                "B1",
+                "B2",
+                "B3",
+                "C1",
+                "C2",
+                "C3"
+            ]
+        },
+        "drawing_area_ratio": {
+            "topo_drawing_area": 260877,
+            "paper_area": 2172480
+        },
+        "stroke_depth": {
+            "mean_gray": 156.82
+        },
+        "content": "Done",
+        "content_size": {
+            "individual_areas": {
+                "cloud1": 37861.70703125,
+                "cloud2": 11959.7890625,
+                "person1": 30620.732421875,
+                "house1": 251723.25,
+                "sun1": 22917.8828125,
+                "house2": 370257.875
+            },
+            "total_box_area": 725341.25,
+            "paper_area": 2172480
+        },
+        "dynamic": {
+            "dynamic_str": "person: 1",
+            "static_str": "cloud: 2, house: 2, sun: 1",
+            "ratio": 0.167,
+            "score": 2
+        },
+        "mood": null,
+        "word": null,
+        "mask": {
+            "drawing_pixels": 86019,
+            "paper_pixels": 2172480
+        },
+        "skeleton": {
+            "skeleton_pixels": 8666
+        }
+    },
+    "1pg13-1.JPG": {
+        "paper_orientation": {
+            "height": 1240,
+            "width": 1752,
+            "desc": "1=縱向, 2=橫向"
+        },
+        "curvature": {
+            "corners_count": 211,
+            "arcs_count": 149
+        },
+        "line_smoothness": {
+            "break_count": 3,
+            "break_ratio": 0.008584280465611372,
+            "fluency_level": 3
+        },
+        "line_thickness": {
+            "thickness_px": 8.79,
+            "red_ratio": 0.0,
+            "level": 2
+        },
+        "drawing_colors": {
+            "colors": [
+                {
+                    "name": "鮭魚紅 (Salmon)",
+                    "rgb": [
+                        216,
+                        80,
+                        104
+                    ],
+                    "prop": 0.484
+                },
+                {
+                    "name": "鋼青色 (Steel Blue)",
+                    "rgb": [
+                        96,
+                        104,
+                        192
+                    ],
+                    "prop": 0.2434
+                },
+                {
+                    "name": "藍綠/水鴨色 (Teal)",
+                    "rgb": [
+                        8,
+                        88,
+                        160
+                    ],
+                    "prop": 0.192
+                },
+                {
+                    "name": "鋼青色 (Steel Blue)",
+                    "rgb": [
+                        24,
+                        136,
+                        200
+                    ],
+                    "prop": 0.0488
+                },
+                {
+                    "name": "黑色 (Black)",
+                    "rgb": [
+                        40,
+                        40,
+                        56
+                    ],
+                    "prop": 0.0318
+                }
+            ]
+        },
+        "shadow_area_ratio": {
+            "shadow_paint_area": 0,
+            "binary_pixel_area": 301061
+        },
+        "shadow_region_count": {
+            "region_count": 0,
+            "paint_area": 0
+        },
+        "drawing_region_3x3": {
+            "region_counts": {
+                "A1": 28124,
+                "A2": 51310,
+                "A3": 37646,
+                "B1": 31643,
+                "B2": 31940,
+                "B3": 15833,
+                "C1": 28406,
+                "C2": 44055,
+                "C3": 32104
+            },
+            "main_region": "A2",
+            "covered_regions": [
+                "A1",
+                "A2",
+                "A3",
+                "B1",
+                "B2",
+                "B3",
+                "C1",
+                "C2",
+                "C3"
+            ]
+        },
+        "drawing_area_ratio": {
+            "topo_drawing_area": 1152286,
+            "paper_area": 2172480
+        },
+        "stroke_depth": {
+            "mean_gray": 122.6
+        },
+        "content": "Done",
+        "content_size": {
+            "individual_areas": {
+                "person1": 20200.171875,
+                "person2": 12009.5341796875,
+                "house1": 386368.90625,
+                "house2": 264787.34375
+            },
+            "total_box_area": 683366.0,
+            "paper_area": 2172480
+        },
+        "dynamic": {
+            "dynamic_str": "person: 2",
+            "static_str": "house: 2",
+            "ratio": 0.5,
+            "score": 10
+        },
+        "mood": null,
+        "word": null,
+        "mask": {
+            "drawing_pixels": 311831,
+            "paper_pixels": 2172480
+        },
+        "skeleton": {
+            "skeleton_pixels": 27519
+        }
+    },
+    "1pg14-2.JPG": {
+        "paper_orientation": {
+            "height": 1752,
+            "width": 1240,
+            "desc": "1=縱向, 2=橫向"
+        },
+        "curvature": {
+            "corners_count": 71,
+            "arcs_count": 75
+        },
+        "line_smoothness": {
+            "break_count": 1,
+            "break_ratio": 0.007948793766197624,
+            "fluency_level": 3
+        },
+        "line_thickness": {
+            "thickness_px": 12.0,
+            "red_ratio": 0.0010414365149506554,
+            "level": 2
+        },
+        "drawing_colors": {
+            "colors": [
+                {
+                    "name": "鮭魚紅 (Salmon)",
+                    "rgb": [
+                        216,
+                        88,
+                        104
+                    ],
+                    "prop": 0.4617
+                },
+                {
+                    "name": "亮粉紅色 (Hot Pink)",
+                    "rgb": [
+                        240,
+                        96,
+                        176
+                    ],
+                    "prop": 0.3491
+                },
+                {
+                    "name": "淺綠色 (Light Green)",
+                    "rgb": [
+                        128,
+                        200,
+                        104
+                    ],
+                    "prop": 0.1306
+                },
+                {
+                    "name": "森林綠 (Forest Green)",
+                    "rgb": [
+                        32,
+                        112,
+                        80
+                    ],
+                    "prop": 0.0422
+                },
+                {
+                    "name": "寶石藍 (Royal Blue)",
+                    "rgb": [
+                        48,
+                        104,
+                        216
+                    ],
+                    "prop": 0.0102
+                },
+                {
+                    "name": "道奇藍 (Dodger Blue)",
+                    "rgb": [
+                        24,
+                        128,
+                        216
+                    ],
+                    "prop": 0.0045
+                },
+                {
+                    "name": "綠松石色 (Turquoise)",
+                    "rgb": [
+                        80,
+                        208,
+                        240
+                    ],
+                    "prop": 0.0017
+                }
+            ]
+        },
+        "shadow_area_ratio": {
+            "shadow_paint_area": 2065,
+            "binary_pixel_area": 227573
+        },
+        "shadow_region_count": {
+            "region_count": 1,
+            "paint_area": 2065
+        },
+        "drawing_region_3x3": {
+            "region_counts": {
+                "A1": 11463,
+                "A2": 23985,
+                "A3": 15507,
+                "B1": 16352,
+                "B2": 32610,
+                "B3": 33274,
+                "C1": 24138,
+                "C2": 30922,
+                "C3": 39322
+            },
+            "main_region": "C3",
+            "covered_regions": [
+                "A1",
+                "A2",
+                "A3",
+                "B1",
+                "B2",
+                "B3",
+                "C1",
+                "C2",
+                "C3"
+            ]
+        },
+        "drawing_area_ratio": {
+            "topo_drawing_area": 794230,
+            "paper_area": 2172480
+        },
+        "stroke_depth": {
+            "mean_gray": 149.63
+        },
+        "content": "Done",
+        "content_size": {
+            "individual_areas": {
+                "house1": 484542.0625
+            },
+            "total_box_area": 484542.0625,
+            "paper_area": 2172480
+        },
+        "dynamic": {
+            "dynamic_str": "None",
+            "static_str": "house: 1",
+            "ratio": 0.0,
+            "score": 1
+        },
+        "mood": null,
+        "word": null,
+        "mask": {
+            "drawing_pixels": 234594,
+            "paper_pixels": 2172480
+        },
+        "skeleton": {
+            "skeleton_pixels": 17564
+        }
+    },
+    "1xg1-2.JPG": {
+        "paper_orientation": {
+            "height": 1752,
+            "width": 1240,
+            "desc": "1=縱向, 2=橫向"
+        },
+        "curvature": {
+            "corners_count": 42,
+            "arcs_count": 48
+        },
+        "line_smoothness": {
+            "break_count": 0,
+            "break_ratio": 0.0,
+            "fluency_level": 3
+        },
+        "line_thickness": {
+            "thickness_px": 8.0,
+            "red_ratio": 0.0,
+            "level": 2
+        },
+        "drawing_colors": {
+            "colors": [
+                {
+                    "name": "鮭魚紅 (Salmon)",
+                    "rgb": [
+                        216,
+                        80,
+                        104
+                    ],
+                    "prop": 0.3378
+                },
+                {
+                    "name": "寶石藍 (Royal Blue)",
+                    "rgb": [
+                        80,
+                        128,
+                        224
+                    ],
+                    "prop": 0.1436
+                },
+                {
+                    "name": "亮粉紅色 (Hot Pink)",
+                    "rgb": [
+                        232,
+                        112,
+                        200
+                    ],
+                    "prop": 0.1317
+                },
+                {
+                    "name": "淺綠色 (Light Green)",
+                    "rgb": [
+                        184,
+                        224,
+                        160
+                    ],
+                    "prop": 0.1259
+                },
+                {
+                    "name": "銀色 (Silver)",
+                    "rgb": [
+                        168,
+                        184,
+                        192
+                    ],
+                    "prop": 0.1138
+                },
+                {
+                    "name": "灰色 (Gray)",
+                    "rgb": [
+                        152,
+                        144,
+                        144
+                    ],
+                    "prop": 0.0441
+                },
+                {
+                    "name": "實木棕 (Burly Wood)",
+                    "rgb": [
+                        224,
+                        192,
+                        160
+                    ],
+                    "prop": 0.0364
+                },
+                {
+                    "name": "灰色 (Gray)",
+                    "rgb": [
+                        144,
+                        128,
+                        120
+                    ],
+                    "prop": 0.0362
+                },
+                {
+                    "name": "銀色 (Silver)",
+                    "rgb": [
+                        160,
+                        160,
+                        216
+                    ],
+                    "prop": 0.0305
+                }
+            ]
+        },
+        "shadow_area_ratio": {
+            "shadow_paint_area": 0,
+            "binary_pixel_area": 115465
+        },
+        "shadow_region_count": {
+            "region_count": 0,
+            "paint_area": 0
+        },
+        "drawing_region_3x3": {
+            "region_counts": {
+                "A1": 9568,
+                "A2": 3396,
+                "A3": 581,
+                "B1": 15765,
+                "B2": 36294,
+                "B3": 27145,
+                "C1": 6710,
+                "C2": 10021,
+                "C3": 5985
+            },
+            "main_region": "B2",
+            "covered_regions": [
+                "A1",
+                "A2",
+                "A3",
+                "B1",
+                "B2",
+                "B3",
+                "C1",
+                "C2",
+                "C3"
+            ]
+        },
+        "drawing_area_ratio": {
+            "topo_drawing_area": 699260,
+            "paper_area": 2172480
+        },
+        "stroke_depth": {
+            "mean_gray": 166.28
+        },
+        "content": "Done",
+        "content_size": {
+            "individual_areas": {
+                "grass1": 7159.99365234375
+            },
+            "total_box_area": 7159.99365234375,
+            "paper_area": 2172480
+        },
+        "dynamic": {
+            "dynamic_str": "None",
+            "static_str": "grass: 1",
+            "ratio": 0.0,
+            "score": 1
+        },
+        "mood": null,
+        "word": null,
+        "mask": {
+            "drawing_pixels": 123653,
+            "paper_pixels": 2172480
+        },
+        "skeleton": {
+            "skeleton_pixels": 13459
+        }
+    },
+    "2.jpg": {
+        "paper_orientation": {
+            "height": 1551,
+            "width": 1752,
+            "desc": "1=縱向, 2=橫向"
+        },
+        "curvature": {
+            "corners_count": 51,
+            "arcs_count": 49
+        },
+        "line_smoothness": {
+            "break_count": 1,
+            "break_ratio": 0.09554653891278843,
+            "fluency_level": 3
+        },
+        "line_thickness": {
+            "thickness_px": 4.0,
+            "red_ratio": 0.0,
+            "level": 1
+        },
+        "drawing_colors": {
+            "colors": [
+                {
+                    "name": "暗灰色 (Dim Gray)",
+                    "rgb": [
+                        104,
+                        104,
+                        104
+                    ],
+                    "prop": 0.4735
+                },
+                {
+                    "name": "黑色 (Black)",
+                    "rgb": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "prop": 0.3908
+                },
+                {
+                    "name": "銀色 (Silver)",
+                    "rgb": [
+                        176,
+                        176,
+                        176
+                    ],
+                    "prop": 0.1197
+                },
+                {
+                    "name": "灰色 (Gray)",
+                    "rgb": [
+                        136,
+                        136,
+                        136
+                    ],
+                    "prop": 0.016
+                }
+            ]
+        },
+        "shadow_area_ratio": {
+            "shadow_paint_area": 0,
+            "binary_pixel_area": 61414
+        },
+        "shadow_region_count": {
+            "region_count": 0,
+            "paint_area": 0
+        },
+        "drawing_region_3x3": {
+            "region_counts": {
+                "A1": 4440,
+                "A2": 8667,
+                "A3": 4550,
+                "B1": 6974,
+                "B2": 16857,
+                "B3": 6466,
+                "C1": 1077,
+                "C2": 8761,
+                "C3": 3622
+            },
+            "main_region": "B2",
+            "covered_regions": [
+                "A1",
+                "A2",
+                "A3",
+                "B1",
+                "B2",
+                "B3",
+                "C1",
+                "C2",
+                "C3"
+            ]
+        },
+        "drawing_area_ratio": {
+            "topo_drawing_area": 137237,
+            "paper_area": 2717352
+        },
+        "stroke_depth": {
+            "mean_gray": 80.44
+        },
+        "content": "Done",
+        "content_size": {},
+        "dynamic": {
+            "dynamic_str": "None",
+            "static_str": "None",
+            "ratio": 0.0,
+            "score": "None"
+        },
+        "mood": null,
+        "word": null,
+        "mask": {
+            "drawing_pixels": 61284,
+            "paper_pixels": 2717352
+        },
+        "skeleton": {
+            "skeleton_pixels": 12927
+        }
+    },
+    "2xg1.JPG": {
+        "paper_orientation": {
+            "height": 1240,
+            "width": 1752,
+            "desc": "1=縱向, 2=橫向"
+        },
+        "curvature": {
+            "corners_count": 90,
+            "arcs_count": 108
+        },
+        "line_smoothness": {
+            "break_count": 0,
+            "break_ratio": 0.0,
+            "fluency_level": 3
+        },
+        "line_thickness": {
+            "thickness_px": 8.0,
+            "red_ratio": 0.0,
+            "level": 2
+        },
+        "drawing_colors": {
+            "colors": [
+                {
+                    "name": "鮭魚紅 (Salmon)",
+                    "rgb": [
+                        216,
+                        128,
+                        152
+                    ],
+                    "prop": 0.9991
+                },
+                {
+                    "name": "黑色 (Black)",
+                    "rgb": [
+                        16,
+                        16,
+                        16
+                    ],
+                    "prop": 0.0009
+                }
+            ]
+        },
+        "shadow_area_ratio": {
+            "shadow_paint_area": 0,
+            "binary_pixel_area": 137172
+        },
+        "shadow_region_count": {
+            "region_count": 0,
+            "paint_area": 0
+        },
+        "drawing_region_3x3": {
+            "region_counts": {
+                "A1": 15439,
+                "A2": 6816,
+                "A3": 0,
+                "B1": 38183,
+                "B2": 29024,
+                "B3": 0,
+                "C1": 26643,
+                "C2": 16065,
+                "C3": 5002
+            },
+            "main_region": "B1",
+            "covered_regions": [
+                "A1",
+                "A2",
+                "B1",
+                "B2",
+                "C1",
+                "C2",
+                "C3"
+            ]
+        },
+        "drawing_area_ratio": {
+            "topo_drawing_area": 299209,
+            "paper_area": 2172480
+        },
+        "stroke_depth": {
+            "mean_gray": 162.17
+        },
+        "content": "Done",
+        "content_size": {
+            "individual_areas": {
+                "sun1": 87322.015625,
+                "person1": 174652.78125,
+                "tree1": 308050.53125
+            },
+            "total_box_area": 570025.3125,
+            "paper_area": 2172480
+        },
+        "dynamic": {
+            "dynamic_str": "person: 1",
+            "static_str": "sun: 1, tree: 1",
+            "ratio": 0.333,
+            "score": 8
+        },
+        "mood": null,
+        "word": null,
+        "mask": {
+            "drawing_pixels": 144757,
+            "paper_pixels": 2172480
+        },
+        "skeleton": {
+            "skeleton_pixels": 15567
         }
     },
     "2xg2-1.JPG": {
@@ -375,6 +1749,1642 @@
         },
         "skeleton": {
             "skeleton_pixels": 24814
+        }
+    },
+    "2xg2-2.JPG": {
+        "paper_orientation": {
+            "height": 1752,
+            "width": 1240,
+            "desc": "1=縱向, 2=橫向"
+        },
+        "curvature": {
+            "corners_count": 50,
+            "arcs_count": 45
+        },
+        "line_smoothness": {
+            "break_count": 0,
+            "break_ratio": 0.0,
+            "fluency_level": 3
+        },
+        "line_thickness": {
+            "thickness_px": 8.39,
+            "red_ratio": 0.0,
+            "level": 2
+        },
+        "drawing_colors": {
+            "colors": [
+                {
+                    "name": "亮粉紅色 (Hot Pink)",
+                    "rgb": [
+                        240,
+                        112,
+                        192
+                    ],
+                    "prop": 1.0
+                }
+            ]
+        },
+        "shadow_area_ratio": {
+            "shadow_paint_area": 0,
+            "binary_pixel_area": 61648
+        },
+        "shadow_region_count": {
+            "region_count": 0,
+            "paint_area": 0
+        },
+        "drawing_region_3x3": {
+            "region_counts": {
+                "A1": 0,
+                "A2": 0,
+                "A3": 0,
+                "B1": 9554,
+                "B2": 0,
+                "B3": 0,
+                "C1": 27678,
+                "C2": 24407,
+                "C3": 9
+            },
+            "main_region": "C1",
+            "covered_regions": [
+                "B1",
+                "C1",
+                "C2",
+                "C3"
+            ]
+        },
+        "drawing_area_ratio": {
+            "topo_drawing_area": 150285,
+            "paper_area": 2172480
+        },
+        "stroke_depth": {
+            "mean_gray": 171.19
+        },
+        "content": "Done",
+        "content_size": {
+            "individual_areas": {
+                "star1": 7735.3564453125,
+                "house1": 101279.1171875,
+                "person1": 58670.98828125,
+                "person2": 36538.58203125
+            },
+            "total_box_area": 204224.046875,
+            "paper_area": 2172480
+        },
+        "dynamic": {
+            "dynamic_str": "person: 2",
+            "static_str": "star: 1, house: 1",
+            "ratio": 0.5,
+            "score": 10
+        },
+        "mood": null,
+        "word": null,
+        "mask": {
+            "drawing_pixels": 64525,
+            "paper_pixels": 2172480
+        },
+        "skeleton": {
+            "skeleton_pixels": 6674
+        }
+    },
+    "2xg3.JPG": {
+        "paper_orientation": {
+            "height": 1240,
+            "width": 1752,
+            "desc": "1=縱向, 2=橫向"
+        },
+        "curvature": {
+            "corners_count": 3,
+            "arcs_count": 31
+        },
+        "line_smoothness": {
+            "break_count": 0,
+            "break_ratio": 0.0,
+            "fluency_level": 3
+        },
+        "line_thickness": {
+            "thickness_px": 9.99,
+            "red_ratio": 0.16254441928119015,
+            "level": 2
+        },
+        "drawing_colors": {
+            "colors": [
+                {
+                    "name": "海藍綠 (Medium Sea Green)",
+                    "rgb": [
+                        104,
+                        192,
+                        112
+                    ],
+                    "prop": 0.559
+                },
+                {
+                    "name": "亮粉紅色 (Hot Pink)",
+                    "rgb": [
+                        208,
+                        104,
+                        160
+                    ],
+                    "prop": 0.3657
+                },
+                {
+                    "name": "梅紅色 (Plum)",
+                    "rgb": [
+                        224,
+                        160,
+                        208
+                    ],
+                    "prop": 0.0583
+                },
+                {
+                    "name": "暗灰色 (Dim Gray)",
+                    "rgb": [
+                        104,
+                        104,
+                        96
+                    ],
+                    "prop": 0.0123
+                },
+                {
+                    "name": "綠松石色 (Turquoise)",
+                    "rgb": [
+                        56,
+                        200,
+                        224
+                    ],
+                    "prop": 0.0027
+                },
+                {
+                    "name": "秘魯色 (Peru)",
+                    "rgb": [
+                        200,
+                        120,
+                        96
+                    ],
+                    "prop": 0.0019
+                }
+            ]
+        },
+        "shadow_area_ratio": {
+            "shadow_paint_area": 128268,
+            "binary_pixel_area": 136865
+        },
+        "shadow_region_count": {
+            "region_count": 1,
+            "paint_area": 128268
+        },
+        "drawing_region_3x3": {
+            "region_counts": {
+                "A1": 36024,
+                "A2": 56149,
+                "A3": 42355,
+                "B1": 0,
+                "B2": 2337,
+                "B3": 0,
+                "C1": 0,
+                "C2": 0,
+                "C3": 0
+            },
+            "main_region": "A2",
+            "covered_regions": [
+                "A1",
+                "A2",
+                "A3",
+                "B2"
+            ]
+        },
+        "drawing_area_ratio": {
+            "topo_drawing_area": 136920,
+            "paper_area": 2172480
+        },
+        "stroke_depth": {
+            "mean_gray": 153.53
+        },
+        "content": "Done",
+        "content_size": {
+            "individual_areas": {
+                "grass1": 1949039.5
+            },
+            "total_box_area": 1949039.5,
+            "paper_area": 2172480
+        },
+        "dynamic": {
+            "dynamic_str": "None",
+            "static_str": "grass: 1",
+            "ratio": 0.0,
+            "score": 1
+        },
+        "mood": null,
+        "word": null,
+        "mask": {
+            "drawing_pixels": 140206,
+            "paper_pixels": 2172480
+        },
+        "skeleton": {
+            "skeleton_pixels": 5032
+        }
+    },
+    "2xg4.JPG": {
+        "paper_orientation": {
+            "height": 1240,
+            "width": 1752,
+            "desc": "1=縱向, 2=橫向"
+        },
+        "curvature": {
+            "corners_count": 78,
+            "arcs_count": 106
+        },
+        "line_smoothness": {
+            "break_count": 0,
+            "break_ratio": 0.0,
+            "fluency_level": 3
+        },
+        "line_thickness": {
+            "thickness_px": 6.0,
+            "red_ratio": 0.0,
+            "level": 1
+        },
+        "drawing_colors": {
+            "colors": [
+                {
+                    "name": "鮭魚紅 (Salmon)",
+                    "rgb": [
+                        208,
+                        120,
+                        136
+                    ],
+                    "prop": 0.576
+                },
+                {
+                    "name": "梅紅色 (Plum)",
+                    "rgb": [
+                        232,
+                        152,
+                        224
+                    ],
+                    "prop": 0.424
+                }
+            ]
+        },
+        "shadow_area_ratio": {
+            "shadow_paint_area": 0,
+            "binary_pixel_area": 156529
+        },
+        "shadow_region_count": {
+            "region_count": 0,
+            "paint_area": 0
+        },
+        "drawing_region_3x3": {
+            "region_counts": {
+                "A1": 19168,
+                "A2": 15590,
+                "A3": 9358,
+                "B1": 29992,
+                "B2": 29314,
+                "B3": 8617,
+                "C1": 8706,
+                "C2": 26287,
+                "C3": 9497
+            },
+            "main_region": "B1",
+            "covered_regions": [
+                "A1",
+                "A2",
+                "A3",
+                "B1",
+                "B2",
+                "B3",
+                "C1",
+                "C2",
+                "C3"
+            ]
+        },
+        "drawing_area_ratio": {
+            "topo_drawing_area": 504393,
+            "paper_area": 2172480
+        },
+        "stroke_depth": {
+            "mean_gray": 184.76
+        },
+        "content": "Done",
+        "content_size": {
+            "individual_areas": {
+                "star1": 6311.4287109375
+            },
+            "total_box_area": 6311.4287109375,
+            "paper_area": 2172480
+        },
+        "dynamic": {
+            "dynamic_str": "None",
+            "static_str": "star: 1",
+            "ratio": 0.0,
+            "score": 1
+        },
+        "mood": null,
+        "word": null,
+        "mask": {
+            "drawing_pixels": 175573,
+            "paper_pixels": 2172480
+        },
+        "skeleton": {
+            "skeleton_pixels": 21103
+        }
+    },
+    "2xg5.JPG": {
+        "paper_orientation": {
+            "height": 1752,
+            "width": 1240,
+            "desc": "1=縱向, 2=橫向"
+        },
+        "curvature": {
+            "corners_count": 4,
+            "arcs_count": 103
+        },
+        "line_smoothness": {
+            "break_count": 0,
+            "break_ratio": 0.0,
+            "fluency_level": 3
+        },
+        "line_thickness": {
+            "thickness_px": 10.4,
+            "red_ratio": 0.876132116291059,
+            "level": 2
+        },
+        "drawing_colors": {
+            "colors": [
+                {
+                    "name": "銀色 (Silver)",
+                    "rgb": [
+                        192,
+                        224,
+                        168
+                    ],
+                    "prop": 0.5593
+                },
+                {
+                    "name": "猩紅色/緋紅 (Crimson)",
+                    "rgb": [
+                        208,
+                        40,
+                        56
+                    ],
+                    "prop": 0.2174
+                },
+                {
+                    "name": "暗灰色 (Dim Gray)",
+                    "rgb": [
+                        120,
+                        88,
+                        88
+                    ],
+                    "prop": 0.0647
+                },
+                {
+                    "name": "亮粉紅色 (Hot Pink)",
+                    "rgb": [
+                        208,
+                        96,
+                        152
+                    ],
+                    "prop": 0.0435
+                },
+                {
+                    "name": "藍綠/水鴨色 (Teal)",
+                    "rgb": [
+                        16,
+                        120,
+                        80
+                    ],
+                    "prop": 0.0422
+                },
+                {
+                    "name": "鋼青色 (Steel Blue)",
+                    "rgb": [
+                        16,
+                        112,
+                        192
+                    ],
+                    "prop": 0.0396
+                },
+                {
+                    "name": "靛色/深紫 (Indigo)",
+                    "rgb": [
+                        56,
+                        56,
+                        128
+                    ],
+                    "prop": 0.0209
+                },
+                {
+                    "name": "實木棕 (Burly Wood)",
+                    "rgb": [
+                        216,
+                        176,
+                        88
+                    ],
+                    "prop": 0.0123
+                }
+            ]
+        },
+        "shadow_area_ratio": {
+            "shadow_paint_area": 148797,
+            "binary_pixel_area": 155476
+        },
+        "shadow_region_count": {
+            "region_count": 3,
+            "paint_area": 148797
+        },
+        "drawing_region_3x3": {
+            "region_counts": {
+                "A1": 31468,
+                "A2": 23324,
+                "A3": 19098,
+                "B1": 2827,
+                "B2": 2570,
+                "B3": 816,
+                "C1": 34774,
+                "C2": 18806,
+                "C3": 21793
+            },
+            "main_region": "C1",
+            "covered_regions": [
+                "A1",
+                "A2",
+                "A3",
+                "B1",
+                "B2",
+                "B3",
+                "C1",
+                "C2",
+                "C3"
+            ]
+        },
+        "drawing_area_ratio": {
+            "topo_drawing_area": 178787,
+            "paper_area": 2172480
+        },
+        "stroke_depth": {
+            "mean_gray": 162.17
+        },
+        "content": "Done",
+        "content_size": {
+            "individual_areas": {
+                "sun1": 59571.82421875,
+                "grass1": 128979.2890625
+            },
+            "total_box_area": 188551.109375,
+            "paper_area": 2172480
+        },
+        "dynamic": {
+            "dynamic_str": "None",
+            "static_str": "sun: 1, grass: 1",
+            "ratio": 0.0,
+            "score": 1
+        },
+        "mood": null,
+        "word": null,
+        "mask": {
+            "drawing_pixels": 160609,
+            "paper_pixels": 2172480
+        },
+        "skeleton": {
+            "skeleton_pixels": 9626
+        }
+    },
+    "2xg6.JPG": {
+        "paper_orientation": {
+            "height": 1240,
+            "width": 1752,
+            "desc": "1=縱向, 2=橫向"
+        },
+        "curvature": {
+            "corners_count": 203,
+            "arcs_count": 184
+        },
+        "line_smoothness": {
+            "break_count": 0,
+            "break_ratio": 0.0,
+            "fluency_level": 3
+        },
+        "line_thickness": {
+            "thickness_px": 8.39,
+            "red_ratio": 0.0,
+            "level": 2
+        },
+        "drawing_colors": {
+            "colors": [
+                {
+                    "name": "寶石藍 (Royal Blue)",
+                    "rgb": [
+                        64,
+                        120,
+                        224
+                    ],
+                    "prop": 0.286
+                },
+                {
+                    "name": "道奇藍 (Dodger Blue)",
+                    "rgb": [
+                        48,
+                        168,
+                        224
+                    ],
+                    "prop": 0.2143
+                },
+                {
+                    "name": "道奇藍 (Dodger Blue)",
+                    "rgb": [
+                        32,
+                        160,
+                        216
+                    ],
+                    "prop": 0.1383
+                },
+                {
+                    "name": "蒼白金 (Pale Goldenrod)",
+                    "rgb": [
+                        232,
+                        224,
+                        176
+                    ],
+                    "prop": 0.0942
+                },
+                {
+                    "name": "亮粉紅色 (Hot Pink)",
+                    "rgb": [
+                        240,
+                        112,
+                        192
+                    ],
+                    "prop": 0.0713
+                },
+                {
+                    "name": "深青色 (Dark Cyan)",
+                    "rgb": [
+                        8,
+                        120,
+                        192
+                    ],
+                    "prop": 0.061
+                },
+                {
+                    "name": "灰色 (Gray)",
+                    "rgb": [
+                        128,
+                        112,
+                        112
+                    ],
+                    "prop": 0.0532
+                },
+                {
+                    "name": "灰色 (Gray)",
+                    "rgb": [
+                        128,
+                        112,
+                        111
+                    ],
+                    "prop": 0.0377
+                },
+                {
+                    "name": "磚紅色 (Firebrick)",
+                    "rgb": [
+                        192,
+                        48,
+                        56
+                    ],
+                    "prop": 0.0185
+                },
+                {
+                    "name": "深藍/海軍藍 (Navy)",
+                    "rgb": [
+                        24,
+                        56,
+                        120
+                    ],
+                    "prop": 0.0156
+                },
+                {
+                    "name": "暗灰色 (Dim Gray)",
+                    "rgb": [
+                        56,
+                        88,
+                        96
+                    ],
+                    "prop": 0.0099
+                }
+            ]
+        },
+        "shadow_area_ratio": {
+            "shadow_paint_area": 0,
+            "binary_pixel_area": 250676
+        },
+        "shadow_region_count": {
+            "region_count": 0,
+            "paint_area": 0
+        },
+        "drawing_region_3x3": {
+            "region_counts": {
+                "A1": 5215,
+                "A2": 1840,
+                "A3": 0,
+                "B1": 13510,
+                "B2": 82762,
+                "B3": 17921,
+                "C1": 22488,
+                "C2": 67460,
+                "C3": 39480
+            },
+            "main_region": "B2",
+            "covered_regions": [
+                "A1",
+                "A2",
+                "B1",
+                "B2",
+                "B3",
+                "C1",
+                "C2",
+                "C3"
+            ]
+        },
+        "drawing_area_ratio": {
+            "topo_drawing_area": 593353,
+            "paper_area": 2172480
+        },
+        "stroke_depth": {
+            "mean_gray": 151.3
+        },
+        "content": "Done",
+        "content_size": {
+            "individual_areas": {
+                "flower1": 10435.845703125,
+                "person1": 17461.27734375
+            },
+            "total_box_area": 27897.123046875,
+            "paper_area": 2172480
+        },
+        "dynamic": {
+            "dynamic_str": "person: 1",
+            "static_str": "flower: 1",
+            "ratio": 0.5,
+            "score": 10
+        },
+        "mood": null,
+        "word": null,
+        "mask": {
+            "drawing_pixels": 260532,
+            "paper_pixels": 2172480
+        },
+        "skeleton": {
+            "skeleton_pixels": 25640
+        }
+    },
+    "2xg7.JPG": {
+        "paper_orientation": {
+            "height": 1752,
+            "width": 1240,
+            "desc": "1=縱向, 2=橫向"
+        },
+        "curvature": {
+            "corners_count": 30,
+            "arcs_count": 109
+        },
+        "line_smoothness": {
+            "break_count": 2,
+            "break_ratio": 0.06396521739130434,
+            "fluency_level": 3
+        },
+        "line_thickness": {
+            "thickness_px": 7.19,
+            "red_ratio": 0.19079093938724406,
+            "level": 1
+        },
+        "drawing_colors": {
+            "colors": [
+                {
+                    "name": "梅紅色 (Plum)",
+                    "rgb": [
+                        232,
+                        160,
+                        240
+                    ],
+                    "prop": 0.2198
+                },
+                {
+                    "name": "海藍綠 (Medium Sea Green)",
+                    "rgb": [
+                        80,
+                        168,
+                        72
+                    ],
+                    "prop": 0.2155
+                },
+                {
+                    "name": "寶石藍 (Royal Blue)",
+                    "rgb": [
+                        48,
+                        104,
+                        208
+                    ],
+                    "prop": 0.1366
+                },
+                {
+                    "name": "海藍綠 (Medium Sea Green)",
+                    "rgb": [
+                        104,
+                        176,
+                        144
+                    ],
+                    "prop": 0.0972
+                },
+                {
+                    "name": "猩紅色/緋紅 (Crimson)",
+                    "rgb": [
+                        216,
+                        56,
+                        64
+                    ],
+                    "prop": 0.0824
+                },
+                {
+                    "name": "森林綠 (Forest Green)",
+                    "rgb": [
+                        32,
+                        120,
+                        80
+                    ],
+                    "prop": 0.0754
+                },
+                {
+                    "name": "灰色 (Gray)",
+                    "rgb": [
+                        168,
+                        128,
+                        128
+                    ],
+                    "prop": 0.0667
+                },
+                {
+                    "name": "鋼青色 (Steel Blue)",
+                    "rgb": [
+                        112,
+                        120,
+                        200
+                    ],
+                    "prop": 0.0475
+                },
+                {
+                    "name": "淺藍色 (Light Blue)",
+                    "rgb": [
+                        176,
+                        208,
+                        248
+                    ],
+                    "prop": 0.019
+                },
+                {
+                    "name": "淺綠色 (Light Green)",
+                    "rgb": [
+                        136,
+                        200,
+                        112
+                    ],
+                    "prop": 0.0148
+                },
+                {
+                    "name": "灰色 (Gray)",
+                    "rgb": [
+                        168,
+                        128,
+                        127
+                    ],
+                    "prop": 0.0117
+                },
+                {
+                    "name": "鋼青色 (Steel Blue)",
+                    "rgb": [
+                        40,
+                        136,
+                        208
+                    ],
+                    "prop": 0.0062
+                },
+                {
+                    "name": "銀色 (Silver)",
+                    "rgb": [
+                        200,
+                        160,
+                        176
+                    ],
+                    "prop": 0.005
+                },
+                {
+                    "name": "綠松石色 (Turquoise)",
+                    "rgb": [
+                        80,
+                        184,
+                        224
+                    ],
+                    "prop": 0.0023
+                }
+            ]
+        },
+        "shadow_area_ratio": {
+            "shadow_paint_area": 102215,
+            "binary_pixel_area": 165492
+        },
+        "shadow_region_count": {
+            "region_count": 6,
+            "paint_area": 102215
+        },
+        "drawing_region_3x3": {
+            "region_counts": {
+                "A1": 3,
+                "A2": 1140,
+                "A3": 1192,
+                "B1": 19409,
+                "B2": 37553,
+                "B3": 6525,
+                "C1": 7955,
+                "C2": 74471,
+                "C3": 17244
+            },
+            "main_region": "C2",
+            "covered_regions": [
+                "A1",
+                "A2",
+                "A3",
+                "B1",
+                "B2",
+                "B3",
+                "C1",
+                "C2",
+                "C3"
+            ]
+        },
+        "drawing_area_ratio": {
+            "topo_drawing_area": 218624,
+            "paper_area": 2172480
+        },
+        "stroke_depth": {
+            "mean_gray": 164.11
+        },
+        "content": "Done",
+        "content_size": {
+            "individual_areas": {
+                "house1": 1098690.625,
+                "flower1": 58110.5625
+            },
+            "total_box_area": 1156801.25,
+            "paper_area": 2172480
+        },
+        "dynamic": {
+            "dynamic_str": "None",
+            "static_str": "house: 1, flower: 1",
+            "ratio": 0.0,
+            "score": 1
+        },
+        "mood": null,
+        "word": null,
+        "mask": {
+            "drawing_pixels": 182525,
+            "paper_pixels": 2172480
+        },
+        "skeleton": {
+            "skeleton_pixels": 13129
+        }
+    },
+    "2xg8.JPG": {
+        "paper_orientation": {
+            "height": 1240,
+            "width": 1752,
+            "desc": "1=縱向, 2=橫向"
+        },
+        "curvature": {
+            "corners_count": 62,
+            "arcs_count": 85
+        },
+        "line_smoothness": {
+            "break_count": 0,
+            "break_ratio": 0.0,
+            "fluency_level": 3
+        },
+        "line_thickness": {
+            "thickness_px": 8.0,
+            "red_ratio": 0.0,
+            "level": 2
+        },
+        "drawing_colors": {
+            "colors": [
+                {
+                    "name": "矢車菊藍 (Cornflower Blue)",
+                    "rgb": [
+                        112,
+                        120,
+                        216
+                    ],
+                    "prop": 0.5383
+                },
+                {
+                    "name": "亮粉紅色 (Hot Pink)",
+                    "rgb": [
+                        240,
+                        112,
+                        192
+                    ],
+                    "prop": 0.2898
+                },
+                {
+                    "name": "淺綠色 (Light Green)",
+                    "rgb": [
+                        128,
+                        200,
+                        104
+                    ],
+                    "prop": 0.0948
+                },
+                {
+                    "name": "鮭魚紅 (Salmon)",
+                    "rgb": [
+                        208,
+                        128,
+                        144
+                    ],
+                    "prop": 0.0348
+                },
+                {
+                    "name": "綠松石色 (Turquoise)",
+                    "rgb": [
+                        88,
+                        184,
+                        224
+                    ],
+                    "prop": 0.0222
+                },
+                {
+                    "name": "海藍綠 (Medium Sea Green)",
+                    "rgb": [
+                        88,
+                        176,
+                        72
+                    ],
+                    "prop": 0.0201
+                }
+            ]
+        },
+        "shadow_area_ratio": {
+            "shadow_paint_area": 0,
+            "binary_pixel_area": 113891
+        },
+        "shadow_region_count": {
+            "region_count": 0,
+            "paint_area": 0
+        },
+        "drawing_region_3x3": {
+            "region_counts": {
+                "A1": 17334,
+                "A2": 28139,
+                "A3": 8471,
+                "B1": 8203,
+                "B2": 36129,
+                "B3": 49,
+                "C1": 2081,
+                "C2": 2980,
+                "C3": 10505
+            },
+            "main_region": "B2",
+            "covered_regions": [
+                "A1",
+                "A2",
+                "A3",
+                "B1",
+                "B2",
+                "B3",
+                "C1",
+                "C2",
+                "C3"
+            ]
+        },
+        "drawing_area_ratio": {
+            "topo_drawing_area": 246841,
+            "paper_area": 2172480
+        },
+        "stroke_depth": {
+            "mean_gray": 158.3
+        },
+        "content": "Done",
+        "content_size": {
+            "individual_areas": {
+                "butterflies1": 19270.357421875,
+                "cloud1": 86155.5078125,
+                "cloud2": 112200.8828125,
+                "cloud3": 21355.16796875,
+                "butterflies2": 16642.90625
+            },
+            "total_box_area": 255624.828125,
+            "paper_area": 2172480
+        },
+        "dynamic": {
+            "dynamic_str": "butterflies: 2",
+            "static_str": "cloud: 3",
+            "ratio": 0.4,
+            "score": 9
+        },
+        "mood": null,
+        "word": null,
+        "mask": {
+            "drawing_pixels": 123565,
+            "paper_pixels": 2172480
+        },
+        "skeleton": {
+            "skeleton_pixels": 11997
+        }
+    },
+    "2xg9.JPG": {
+        "paper_orientation": {
+            "height": 1752,
+            "width": 1240,
+            "desc": "1=縱向, 2=橫向"
+        },
+        "curvature": {
+            "corners_count": 5,
+            "arcs_count": 16
+        },
+        "line_smoothness": {
+            "break_count": 0,
+            "break_ratio": 0.0,
+            "fluency_level": 3
+        },
+        "line_thickness": {
+            "thickness_px": 10.4,
+            "red_ratio": 0.2037026808071881,
+            "level": 2
+        },
+        "drawing_colors": {
+            "colors": [
+                {
+                    "name": "亮粉紅色 (Hot Pink)",
+                    "rgb": [
+                        224,
+                        80,
+                        144
+                    ],
+                    "prop": 0.4232
+                },
+                {
+                    "name": "猩紅色/緋紅 (Crimson)",
+                    "rgb": [
+                        208,
+                        40,
+                        48
+                    ],
+                    "prop": 0.3354
+                },
+                {
+                    "name": "海藍綠 (Medium Sea Green)",
+                    "rgb": [
+                        72,
+                        160,
+                        120
+                    ],
+                    "prop": 0.0678
+                },
+                {
+                    "name": "天藍色 (Sky Blue)",
+                    "rgb": [
+                        136,
+                        216,
+                        248
+                    ],
+                    "prop": 0.0548
+                },
+                {
+                    "name": "天藍色 (Sky Blue)",
+                    "rgb": [
+                        152,
+                        216,
+                        248
+                    ],
+                    "prop": 0.0441
+                },
+                {
+                    "name": "灰色 (Gray)",
+                    "rgb": [
+                        136,
+                        80,
+                        152
+                    ],
+                    "prop": 0.0431
+                },
+                {
+                    "name": "鋼青色 (Steel Blue)",
+                    "rgb": [
+                        16,
+                        128,
+                        192
+                    ],
+                    "prop": 0.0316
+                }
+            ]
+        },
+        "shadow_area_ratio": {
+            "shadow_paint_area": 114258,
+            "binary_pixel_area": 121410
+        },
+        "shadow_region_count": {
+            "region_count": 2,
+            "paint_area": 114258
+        },
+        "drawing_region_3x3": {
+            "region_counts": {
+                "A1": 18651,
+                "A2": 6350,
+                "A3": 0,
+                "B1": 11393,
+                "B2": 1518,
+                "B3": 0,
+                "C1": 0,
+                "C2": 37219,
+                "C3": 46279
+            },
+            "main_region": "C3",
+            "covered_regions": [
+                "A1",
+                "A2",
+                "B1",
+                "B2",
+                "C2",
+                "C3"
+            ]
+        },
+        "drawing_area_ratio": {
+            "topo_drawing_area": 122069,
+            "paper_area": 2172480
+        },
+        "stroke_depth": {
+            "mean_gray": 134.18
+        },
+        "content": "Done",
+        "content_size": {
+            "individual_areas": {
+                "flower1": 70447.9140625,
+                "person1": 213449.28125
+            },
+            "total_box_area": 283897.1875,
+            "paper_area": 2172480
+        },
+        "dynamic": {
+            "dynamic_str": "person: 1",
+            "static_str": "flower: 1",
+            "ratio": 0.5,
+            "score": 10
+        },
+        "mood": null,
+        "word": null,
+        "mask": {
+            "drawing_pixels": 122596,
+            "paper_pixels": 2172480
+        },
+        "skeleton": {
+            "skeleton_pixels": 3478
+        }
+    },
+    "a.jpg": {
+        "paper_orientation": {
+            "height": 1752,
+            "width": 1238,
+            "desc": "1=縱向, 2=橫向"
+        },
+        "curvature": {
+            "corners_count": 28,
+            "arcs_count": 14
+        },
+        "line_smoothness": {
+            "break_count": 0,
+            "break_ratio": 0.0,
+            "fluency_level": 3
+        },
+        "line_thickness": {
+            "thickness_px": 7.19,
+            "red_ratio": 0.0,
+            "level": 1
+        },
+        "drawing_colors": {
+            "colors": [
+                {
+                    "name": "寶石藍 (Royal Blue)",
+                    "rgb": [
+                        24,
+                        64,
+                        232
+                    ],
+                    "prop": 1.0
+                }
+            ]
+        },
+        "shadow_area_ratio": {
+            "shadow_paint_area": 0,
+            "binary_pixel_area": 33348
+        },
+        "shadow_region_count": {
+            "region_count": 0,
+            "paint_area": 0
+        },
+        "drawing_region_3x3": {
+            "region_counts": {
+                "A1": 5301,
+                "A2": 12738,
+                "A3": 0,
+                "B1": 2318,
+                "B2": 8803,
+                "B3": 4188,
+                "C1": 0,
+                "C2": 0,
+                "C3": 0
+            },
+            "main_region": "A2",
+            "covered_regions": [
+                "A1",
+                "A2",
+                "B1",
+                "B2",
+                "B3"
+            ]
+        },
+        "drawing_area_ratio": {
+            "topo_drawing_area": 36465,
+            "paper_area": 2168976
+        },
+        "stroke_depth": {
+            "mean_gray": 120.32
+        },
+        "content": "Done",
+        "content_size": {},
+        "dynamic": {
+            "dynamic_str": "None",
+            "static_str": "None",
+            "ratio": 0.0,
+            "score": "None"
+        },
+        "mood": null,
+        "word": null,
+        "mask": {
+            "drawing_pixels": 34735,
+            "paper_pixels": 2168976
+        },
+        "skeleton": {
+            "skeleton_pixels": 4062
+        }
+    },
+    "b.jpg": {
+        "paper_orientation": {
+            "height": 1752,
+            "width": 1238,
+            "desc": "1=縱向, 2=橫向"
+        },
+        "curvature": {
+            "corners_count": 26,
+            "arcs_count": 4
+        },
+        "line_smoothness": {
+            "break_count": 0,
+            "break_ratio": 0.0,
+            "fluency_level": 3
+        },
+        "line_thickness": {
+            "thickness_px": 8.0,
+            "red_ratio": 0.0,
+            "level": 2
+        },
+        "drawing_colors": {
+            "colors": [
+                {
+                    "name": "寶石藍 (Royal Blue)",
+                    "rgb": [
+                        24,
+                        64,
+                        232
+                    ],
+                    "prop": 1.0
+                }
+            ]
+        },
+        "shadow_area_ratio": {
+            "shadow_paint_area": 0,
+            "binary_pixel_area": 29231
+        },
+        "shadow_region_count": {
+            "region_count": 0,
+            "paint_area": 0
+        },
+        "drawing_region_3x3": {
+            "region_counts": {
+                "A1": 5390,
+                "A2": 6250,
+                "A3": 1395,
+                "B1": 2225,
+                "B2": 9567,
+                "B3": 7,
+                "C1": 0,
+                "C2": 3811,
+                "C3": 586
+            },
+            "main_region": "B2",
+            "covered_regions": [
+                "A1",
+                "A2",
+                "A3",
+                "B1",
+                "B2",
+                "B3",
+                "C2",
+                "C3"
+            ]
+        },
+        "drawing_area_ratio": {
+            "topo_drawing_area": 145235,
+            "paper_area": 2168976
+        },
+        "stroke_depth": {
+            "mean_gray": 119.71
+        },
+        "content": "Done",
+        "content_size": {
+            "individual_areas": {
+                "star1": 66637.9921875
+            },
+            "total_box_area": 66637.9921875,
+            "paper_area": 2168976
+        },
+        "dynamic": {
+            "dynamic_str": "None",
+            "static_str": "star: 1",
+            "ratio": 0.0,
+            "score": 1
+        },
+        "mood": null,
+        "word": null,
+        "mask": {
+            "drawing_pixels": 30327,
+            "paper_pixels": 2168976
+        },
+        "skeleton": {
+            "skeleton_pixels": 3749
+        }
+    },
+    "c.jpg": {
+        "paper_orientation": {
+            "height": 1752,
+            "width": 1236,
+            "desc": "1=縱向, 2=橫向"
+        },
+        "curvature": {
+            "corners_count": 52,
+            "arcs_count": 31
+        },
+        "line_smoothness": {
+            "break_count": 0,
+            "break_ratio": 0.0,
+            "fluency_level": 3
+        },
+        "line_thickness": {
+            "thickness_px": 6.39,
+            "red_ratio": 0.0,
+            "level": 1
+        },
+        "drawing_colors": {
+            "colors": [
+                {
+                    "name": "寶石藍 (Royal Blue)",
+                    "rgb": [
+                        16,
+                        64,
+                        224
+                    ],
+                    "prop": 0.4156
+                },
+                {
+                    "name": "金色 (Gold)",
+                    "rgb": [
+                        240,
+                        232,
+                        16
+                    ],
+                    "prop": 0.2151
+                },
+                {
+                    "name": "金色 (Gold)",
+                    "rgb": [
+                        248,
+                        200,
+                        64
+                    ],
+                    "prop": 0.1882
+                },
+                {
+                    "name": "猩紅色/緋紅 (Crimson)",
+                    "rgb": [
+                        224,
+                        48,
+                        48
+                    ],
+                    "prop": 0.1811
+                }
+            ]
+        },
+        "shadow_area_ratio": {
+            "shadow_paint_area": 0,
+            "binary_pixel_area": 44499
+        },
+        "shadow_region_count": {
+            "region_count": 0,
+            "paint_area": 0
+        },
+        "drawing_region_3x3": {
+            "region_counts": {
+                "A1": 5342,
+                "A2": 6086,
+                "A3": 1384,
+                "B1": 7493,
+                "B2": 11456,
+                "B3": 1,
+                "C1": 1352,
+                "C2": 10739,
+                "C3": 646
+            },
+            "main_region": "B2",
+            "covered_regions": [
+                "A1",
+                "A2",
+                "A3",
+                "B1",
+                "B2",
+                "B3",
+                "C1",
+                "C2",
+                "C3"
+            ]
+        },
+        "drawing_area_ratio": {
+            "topo_drawing_area": 177249,
+            "paper_area": 2165472
+        },
+        "stroke_depth": {
+            "mean_gray": 173.73
+        },
+        "content": "Done",
+        "content_size": {
+            "individual_areas": {
+                "star1": 65431.18359375
+            },
+            "total_box_area": 65431.18359375,
+            "paper_area": 2165472
+        },
+        "dynamic": {
+            "dynamic_str": "None",
+            "static_str": "star: 1",
+            "ratio": 0.0,
+            "score": 1
+        },
+        "mood": null,
+        "word": null,
+        "mask": {
+            "drawing_pixels": 47274,
+            "paper_pixels": 2165472
+        },
+        "skeleton": {
+            "skeleton_pixels": 6084
+        }
+    },
+    "d.jpg": {
+        "paper_orientation": {
+            "height": 1752,
+            "width": 1236,
+            "desc": "1=縱向, 2=橫向"
+        },
+        "curvature": {
+            "corners_count": 72,
+            "arcs_count": 51
+        },
+        "line_smoothness": {
+            "break_count": 0,
+            "break_ratio": 0.0,
+            "fluency_level": 3
+        },
+        "line_thickness": {
+            "thickness_px": 5.6,
+            "red_ratio": 0.0,
+            "level": 1
+        },
+        "drawing_colors": {
+            "colors": [
+                {
+                    "name": "淺藍色 (Light Blue)",
+                    "rgb": [
+                        184,
+                        200,
+                        248
+                    ],
+                    "prop": 0.5275
+                },
+                {
+                    "name": "蒼白金 (Pale Goldenrod)",
+                    "rgb": [
+                        248,
+                        232,
+                        168
+                    ],
+                    "prop": 0.2392
+                },
+                {
+                    "name": "藍紫色 (Blue Violet)",
+                    "rgb": [
+                        144,
+                        56,
+                        232
+                    ],
+                    "prop": 0.1196
+                },
+                {
+                    "name": "梅紅色 (Plum)",
+                    "rgb": [
+                        240,
+                        152,
+                        240
+                    ],
+                    "prop": 0.0666
+                },
+                {
+                    "name": "猩紅色/緋紅 (Crimson)",
+                    "rgb": [
+                        232,
+                        56,
+                        56
+                    ],
+                    "prop": 0.0472
+                }
+            ]
+        },
+        "shadow_area_ratio": {
+            "shadow_paint_area": 0,
+            "binary_pixel_area": 63806
+        },
+        "shadow_region_count": {
+            "region_count": 0,
+            "paint_area": 0
+        },
+        "drawing_region_3x3": {
+            "region_counts": {
+                "A1": 9403,
+                "A2": 7852,
+                "A3": 8649,
+                "B1": 8716,
+                "B2": 9595,
+                "B3": 5049,
+                "C1": 1429,
+                "C2": 10412,
+                "C3": 2701
+            },
+            "main_region": "C2",
+            "covered_regions": [
+                "A1",
+                "A2",
+                "A3",
+                "B1",
+                "B2",
+                "B3",
+                "C1",
+                "C2",
+                "C3"
+            ]
+        },
+        "drawing_area_ratio": {
+            "topo_drawing_area": 200767,
+            "paper_area": 2165472
+        },
+        "stroke_depth": {
+            "mean_gray": 163.79
+        },
+        "content": "Done",
+        "content_size": {
+            "individual_areas": {
+                "star1": 67258.5625
+            },
+            "total_box_area": 67258.5625,
+            "paper_area": 2165472
+        },
+        "dynamic": {
+            "dynamic_str": "None",
+            "static_str": "star: 1",
+            "ratio": 0.0,
+            "score": 1
+        },
+        "mood": null,
+        "word": null,
+        "mask": {
+            "drawing_pixels": 68560,
+            "paper_pixels": 2165472
+        },
+        "skeleton": {
+            "skeleton_pixels": 10390
         }
     }
 }
