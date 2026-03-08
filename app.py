@@ -6,6 +6,7 @@ import pandas as pd
 import zipfile
 import py7zr
 import rarfile
+rarfile.UNRAR_TOOL = r"C:\Program Files\WinRAR\UnRAR.exe"
 from io import BytesIO
 from ultralytics import YOLO
 
