@@ -4,6 +4,8 @@ import os
 import tempfile
 import pandas as pd
 import zipfile
+import py7zr
+import rarfile
 from io import BytesIO
 from ultralytics import YOLO
 
@@ -34,8 +36,8 @@ yolo_model = load_model()
 
 # --- 3. 建立多檔案上傳區塊 (新增 zip 支援) ---
 uploaded_files = st.file_uploader(
-    "上傳圖片或 ZIP 壓縮檔 (支援多選)", 
-    type=["jpg", "jpeg", "png", "bmp", "zip"], 
+    "上傳圖片、ZIP、RAR 或 7Z (支援多選)", 
+    type=["jpg", "jpeg", "png", "bmp", "zip", "rar", "7z"],
     accept_multiple_files=True
 )
 
@@ -58,10 +60,16 @@ if uploaded_files:
             
             # 步驟 A: 整理所有上傳的檔案
             for uploaded_file in uploaded_files:
-                if uploaded_file.name.lower().endswith('.zip'):
-                    # 如果是 ZIP 檔，直接解壓縮到 process_dir
-                    with zipfile.ZipFile(uploaded_file, 'r') as zip_ref:
-                        zip_ref.extractall(process_dir)
+                fname = uploaded_file.name.lower()
+                if fname.endswith('.zip'):
+                    with zipfile.ZipFile(uploaded_file, 'r') as z:
+                        z.extractall(process_dir)
+                elif fname.endswith('.7z'):
+                    with py7zr.SevenZipFile(uploaded_file, mode='r') as s:
+                        s.extractall(process_dir)
+                elif fname.endswith('.rar'):
+                    with rarfile.RarFile(uploaded_file) as r:
+                        r.extractall(process_dir)
                 else:
                     # 如果是一般圖片，直接存入 process_dir
                     file_path = os.path.join(process_dir, uploaded_file.name)
