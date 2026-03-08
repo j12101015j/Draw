@@ -1,4 +1,4 @@
-opencv-contrib-python-headless==4.8.1.78
+opencv-contrib-python-headless==4.13.0.92
 
 streamlit
 
