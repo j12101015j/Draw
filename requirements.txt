@@ -1,6 +1,5 @@
 streamlit
-opencv-python-headless
-numpy
+opencv-contrib-python-headlessnumpy
 pandas
 scikit-image
 scipy
