@@ -23,17 +23,39 @@ if 'analysis_done' not in st.session_state:
     st.session_state.analysis_done = False
     st.session_state.df_cn = None
 
-# --- 2. 載入 YOLO 模型 ---
+# --- 2. 載入 YOLO 模型 (新增情緒與文字模型) ---
 @st.cache_resource
-def load_model():
-    model_path = "models/content.pt" # 確保檔名正確
-    if os.path.exists(model_path):
-        return YOLO(model_path)
+def load_models():
+    models = {}
+    
+    # 內容模型
+    content_path = "models/content.pt"
+    if os.path.exists(content_path):
+        models['content'] = YOLO(content_path)
     else:
-        st.warning(f"找不到 YOLO 模型檔 ({model_path})，內容辨識功能將無效。")
-        return None
+        st.warning(f"找不到內容模型 ({content_path})。")
+        models['content'] = None
 
-yolo_model = load_model()
+    # 情緒模型
+    mood_path = "models/emotion.pt"
+    if os.path.exists(mood_path):
+        models['mood'] = YOLO(mood_path)
+    else:
+        st.warning(f"找不到情緒模型 ({mood_path})。")
+        models['mood'] = None
+
+    # 文字模型
+    word_path = "models/pure_draw_6_1_best_v8s.pt"
+    if os.path.exists(word_path):
+        models['word'] = YOLO(word_path)
+    else:
+        st.warning(f"找不到文字模型 ({word_path})。")
+        models['word'] = None
+        
+    return models
+
+# 取得三個模型
+yolo_models = load_models()
 
 # --- 3. 建立多檔案上傳區塊 (新增 zip 支援) ---
 uploaded_files = st.file_uploader(
@@ -53,7 +75,7 @@ if uploaded_files:
         temp_out_dir = "temp_web_output"
         os.makedirs(temp_out_dir, exist_ok=True)
         
-        # 🌟 建立一個自動清理的暫存資料夾，用來解壓縮和收集所有圖片
+        # 建立一個自動清理的暫存資料夾，用來解壓縮和收集所有圖片
         with tempfile.TemporaryDirectory() as process_dir:
             image_paths_to_process = []
             
@@ -82,7 +104,7 @@ if uploaded_files:
             for root, dirs, files in os.walk(process_dir):
                 for file in files:
                     if os.path.splitext(file)[1].lower() in valid_exts:
-                        # 略過 Mac 系統常產生的隱藏垃圾檔 (如 ._image.jpg 或 __MACOSX)
+                        # 略過 Mac 系統常產生的隱藏垃圾檔
                         if not file.startswith('._') and '__MACOSX' not in root:
                             image_paths_to_process.append(os.path.join(root, file))
             
@@ -97,10 +119,13 @@ if uploaded_files:
                     status_text.text(f"正在分析 ({i+1}/{total_images}): {img_name}")
                     
                     try:
+                        # 將三個模型都傳遞給 features.py
                         res = extract_features_for_image(
                             image_path=img_path, 
                             base_out_dir=temp_out_dir, 
-                            model=yolo_model
+                            model=yolo_models['content'],
+                            mood_model=yolo_models['mood'],
+                            word_model=yolo_models['word']
                         )
                         
                         if res:
@@ -123,7 +148,10 @@ if uploaded_files:
                                 "繪畫物品占繪畫內容比": res.row.get("content_size_all"),
                                 "繪畫物品占紙張比": res.row.get("content_size_paper"),
                                 "事物動態性": res.row.get("dynamic"),
-                                "情緒": res.row.get("mood"),
+                                
+                                # 🌟 關鍵修正：從 get("mood") 改回正確的 get("emotion") 🌟
+                                "情緒": res.row.get("emotion"), 
+                                
                                 "文字": res.row.get("word")
                             }
                             rows_cn.append(row_cn)
@@ -145,12 +173,14 @@ if st.session_state.analysis_done and st.session_state.df_cn is not None:
     df_cn = st.session_state.df_cn
     
     st.subheader("📊 分析總表預覽")
-    st.dataframe(df_cn)
+    
+    # 🌟 唯一保留這行 astype(str)，徹底解決 ArrowTypeError 崩潰問題！
+    st.dataframe(df_cn.astype(str))
     
     st.write("---")
     col1, col2 = st.columns(2)
     
-    # CSV 下載 (強制編碼解決亂碼問題)
+    # CSV 下載
     csv = df_cn.to_csv(index=False).encode('utf-8-sig')
     with col1:
         st.download_button(

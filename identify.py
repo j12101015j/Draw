@@ -39,23 +39,38 @@ def main():
     os.makedirs(base_out_dir, exist_ok=True)
     
     # =======================================================
-    # 新增：大掃除，開始前自動清除舊的動態性 CSV，避免重複疊加
+    # 大掃除：開始前自動清除舊的各項 CSV，避免接力寫入時重複疊加
     # =======================================================
-    dyn_csv_path = os.path.join(base_out_dir, "dynamic", "dynamic.csv")
-    if os.path.exists(dyn_csv_path):
-        try: os.remove(dyn_csv_path)
-        except: pass
+    csv_to_clear = [
+        os.path.join(base_out_dir, "dynamic", "dynamic.csv"),
+        os.path.join(base_out_dir, "emotion", "emotion.csv"),
+        os.path.join(base_out_dir, "number", "number.csv")
+    ]
+    for csv_path in csv_to_clear:
+        if os.path.exists(csv_path):
+            try: os.remove(csv_path)
+            except: pass
 
-    # YOLO 模型路徑
-    #model_path = r"E:\XTX2\kidsdrawing.v3i.yolov8\內容辨識\model\merged_10_classes_v8s_oversample_OK\weights\best.pt"
-    model_path="models/content.pt"
-    print(f"[INFO] 正在載入 YOLO 模型: {model_path}")
-    
-    if not os.path.exists(model_path):
-        print(f"[警告] 找不到 YOLO 模型: {model_path}，將無法執行內容辨識。")
-        yolo_model = None
-    else:
-        yolo_model = YOLO(model_path)
+    # =======================================================
+    # 載入 YOLO 模型 (共 3 個)
+    # =======================================================
+    # 1. 內容模型 (Content)
+    model_path_content = "models/content.pt"
+    print(f"[INFO] 正在載入 YOLO 內容模型: {model_path_content}")
+    yolo_model_content = YOLO(model_path_content) if os.path.exists(model_path_content) else None
+    if not yolo_model_content: print("[警告] 找不到內容模型。")
+
+    # 2. 情緒模型 (Mood / Emotion) - 請確認你的權重檔名並放置於正確位置
+    model_path_mood = "models/emotion.pt"
+    print(f"[INFO] 正在載入 YOLO 情緒模型: {model_path_mood}")
+    yolo_model_mood = YOLO(model_path_mood) if os.path.exists(model_path_mood) else None
+    if not yolo_model_mood: print("[警告] 找不到情緒模型。")
+
+    # 3. 文字模型 (Word / Number) - 請確認你的權重檔名並放置於正確位置
+    model_path_word = "models/pure_draw_6_1_best_v8s.pt"
+    print(f"[INFO] 正在載入 YOLO 文字模型: {model_path_word}")
+    yolo_model_word = YOLO(model_path_word) if os.path.exists(model_path_word) else None
+    if not yolo_model_word: print("[警告] 找不到文字模型。")
 
     valid_exts = {".jpg", ".jpeg", ".png", ".bmp", ".JPG", ".JPEG", ".PNG", ".BMP"}
     
@@ -85,9 +100,15 @@ def main():
         img_path = os.path.join(input_parent, img_name)
         try:
             print(f"-> 正在分析: {img_name}")
-            # 注意：請確認你的 features.py 接收參數的方式是 yolo_model 還是 model
-            # 若為 model，請把 yolo_model=yolo_model 改為 model=yolo_model
-            res = extract_features_for_image(img_path, base_out_dir, model=yolo_model)
+            
+            # 傳入 3 個不同的模型給 features
+            res = extract_features_for_image(
+                img_path, 
+                base_out_dir, 
+                model=yolo_model_content,
+                mood_model=yolo_model_mood,
+                word_model=yolo_model_word
+            )
             
             if res is None:
                 continue
@@ -95,7 +116,7 @@ def main():
             # 1. 原版英文存入
             rows.append(res.row)
             
-            # 2. 新增：中文版欄位直接對應存入
+            # 2. 中文版欄位直接對應存入
             row_cn = {
                 "圖檔名稱": res.row.get("image"),
                 "紙張方向": res.row.get("paper_orientation"),
@@ -115,7 +136,7 @@ def main():
                 "繪畫物品占繪畫內容比": res.row.get("content_size_all"),
                 "繪畫物品占紙張比": res.row.get("content_size_paper"),
                 "事物動態性": res.row.get("dynamic"),
-                "情緒": res.row.get("mood"),
+                "情緒": res.row.get("emotion"),
                 "文字": res.row.get("word")
             }
             rows_cn.append(row_cn)
