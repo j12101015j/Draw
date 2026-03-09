@@ -1,5 +1,3 @@
-opencv-contrib-python-headless==4.13.0.92
-
 streamlit
 
 numpy
@@ -19,3 +17,6 @@ openpyxl
 py7zr
 
 rarfile
+
+opencv-contrib-python-headless==4.13.0.92
+
