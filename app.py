@@ -29,21 +29,25 @@ if 'analysis_done' not in st.session_state:
 
 # --- 2. 記憶體監控器 ---
 def show_memory_monitor():
-    """在側邊欄顯示記憶體狀態"""
-    mem = psutil.virtual_memory()
-    used_gb = mem.used / (1024 ** 3)
+    """在側邊欄顯示記憶體狀態 (精準測量本程式)"""
+    # 抓取「當前這個 Python 程式」的進程
+    process = psutil.Process(os.getpid())
+    
+    # 🌟 關鍵修改：只計算這個程式實際佔用的實體記憶體 (RSS)
+    used_gb = process.memory_info().rss / (1024 ** 3)
+    
     total_gb = 1.0  # Streamlit Cloud 通常分配約 1GB
     percent = (used_gb / total_gb) * 100
 
     st.sidebar.divider()
-    st.sidebar.subheader("🖥️ 雲端資源監測")
+    st.sidebar.subheader("🖥️ 雲端資源監測 (精準版)")
 
     color = "normal"
     if percent > 85:
         color = "inverse"
         st.sidebar.warning("⚠️ 記憶體即將耗盡，請分批處理圖片")
 
-    st.sidebar.metric(label="目前已使用記憶體", value=f"{used_gb:.2f} GB", delta=f"{percent:.1f}%", delta_color=color)
+    st.sidebar.metric(label="本程式專屬記憶體", value=f"{used_gb:.2f} GB", delta=f"{percent:.1f}%", delta_color=color)
     st.sidebar.progress(min(percent/100, 1.0))
     st.sidebar.caption(f"註：Streamlit Cloud 免費版上限約 {total_gb} GB")
 
