@@ -5,6 +5,7 @@ import tempfile
 import pandas as pd
 import zipfile
 import py7zr
+import psutil
 import rarfile
 rarfile.UNRAR_TOOL = r"C:\Program Files\WinRAR\UnRAR.exe"
 from io import BytesIO
@@ -22,6 +23,29 @@ st.write("請點擊下方按鈕上傳圖片，或直接上傳包含圖片的 ZIP
 if 'analysis_done' not in st.session_state:
     st.session_state.analysis_done = False
     st.session_state.df_cn = None
+
+def show_memory_monitor():
+    """在側邊欄顯示記憶體狀態"""
+    mem = psutil.virtual_memory()
+    # 轉換為 GB
+    used_gb = mem.used / (1024 ** 3)
+    total_gb = 1.0  # Streamlit Cloud 通常分配約 1GB
+    percent = (used_gb / total_gb) * 100
+
+    st.sidebar.divider()
+    st.sidebar.subheader("🖥️ 雲端資源監測")
+    
+    # 根據壓力顯示顏色
+    color = "normal"
+    if percent > 85:
+        color = "inverse"
+        st.sidebar.warning("⚠️ 記憶體即將耗盡，請分批處理圖片")
+    
+    st.sidebar.metric(label="目前已使用記憶體", value=f"{used_gb:.2f} GB", delta=f"{percent:.1f}%", delta_color=color)
+    st.sidebar.progress(min(percent/100, 1.0))
+    st.sidebar.caption(f"註：Streamlit Cloud 免費版上限約 {total_gb} GB")
+
+show_memory_monitor() # 執行監測
 
 # --- 2. 載入 YOLO 模型 (新增情緒與文字模型) ---
 @st.cache_resource
