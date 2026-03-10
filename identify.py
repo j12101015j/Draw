@@ -6,6 +6,8 @@
 """
 
 import argparse
+import time
+import torch
 import os
 import json
 import pandas as pd
@@ -16,6 +18,12 @@ from ultralytics import YOLO
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 from features import extract_features_for_image
+
+# =======================================================
+# ⚙️ 系統控制區 (在這裡手動更改設定)
+# =======================================================
+FORCE_DEVICE = "cpu"  # 填入 "auto" (自動偵測), "cpu" (強制使用 CPU), 或 "gpu" (強制使用 GPU)
+# =======================================================
 
 class NpEncoder(json.JSONEncoder):
     def default(self, obj):
@@ -34,7 +42,35 @@ def main():
     args = parser.parse_args()
 
     input_dir = args.input
-    base_out_dir = args.output  
+    base_out_dir = args.output
+    
+    # 直接讀取控制區的設定，並轉成小寫防呆
+    device_choice = FORCE_DEVICE.lower()
+
+    # 開始計時
+    start_time = time.time()
+
+    # =======================================================
+    # 決定 YOLO 運算設備 (CPU 或 GPU)
+    # =======================================================
+    has_gpu = torch.cuda.is_available()
+    if device_choice == "gpu" and not has_gpu:
+        print("[系統] ⚠️ 警告：您選擇了 GPU，但系統未偵測到可用的 CUDA 環境，將強制降級使用 CPU。")
+        actual_device = "cpu"
+    elif device_choice == "gpu" and has_gpu:
+        actual_device = "cuda:0"
+    elif device_choice == "cpu":
+        actual_device = "cpu"
+    else: # auto
+        actual_device = "cuda:0" if has_gpu else "cpu"
+
+    print("="*50)
+    if actual_device == "cpu":
+        print("[系統] 🐢 本次 YOLO 辨識將使用「純 CPU」運算。")
+    else:
+        gpu_name = torch.cuda.get_device_name(0)
+        print(f"[系統] 🚀 本次 YOLO 辨識已啟用「GPU 加速」: {gpu_name} ({actual_device})")
+    print("="*50)
 
     os.makedirs(base_out_dir, exist_ok=True)
     
@@ -58,19 +94,28 @@ def main():
     model_path_content = "models/content.pt"
     print(f"[INFO] 正在載入 YOLO 內容模型: {model_path_content}")
     yolo_model_content = YOLO(model_path_content) if os.path.exists(model_path_content) else None
-    if not yolo_model_content: print("[警告] 找不到內容模型。")
+    if yolo_model_content: 
+        yolo_model_content.to(actual_device)
+    else: 
+        print("[警告] 找不到內容模型。")
 
-    # 2. 情緒模型 (Mood / Emotion) - 請確認你的權重檔名並放置於正確位置
+    # 2. 情緒模型 (Mood / Emotion)
     model_path_mood = "models/emotion.pt"
     print(f"[INFO] 正在載入 YOLO 情緒模型: {model_path_mood}")
     yolo_model_mood = YOLO(model_path_mood) if os.path.exists(model_path_mood) else None
-    if not yolo_model_mood: print("[警告] 找不到情緒模型。")
+    if yolo_model_mood: 
+        yolo_model_mood.to(actual_device)
+    else: 
+        print("[警告] 找不到情緒模型。")
 
-    # 3. 文字模型 (Word / Number) - 請確認你的權重檔名並放置於正確位置
+    # 3. 文字模型 (Word / Number)
     model_path_word = "models/pure_draw_6_1_best_v8s.pt"
     print(f"[INFO] 正在載入 YOLO 文字模型: {model_path_word}")
     yolo_model_word = YOLO(model_path_word) if os.path.exists(model_path_word) else None
-    if not yolo_model_word: print("[警告] 找不到文字模型。")
+    if yolo_model_word: 
+        yolo_model_word.to(actual_device)
+    else: 
+        print("[警告] 找不到文字模型。")
 
     valid_exts = {".jpg", ".jpeg", ".png", ".bmp", ".JPG", ".JPEG", ".PNG", ".BMP"}
     
@@ -179,9 +224,18 @@ def main():
                 json.dump(raw_json, f, indent=4, ensure_ascii=False, cls=NpEncoder)
             print(f"[INFO] 總表 JSON 已儲存至 {out_json}")
         
-        print(f"========================================")
     else:
         print("[警告] 無法生成總表。")
+
+    # 結算總時間
+    end_time = time.time()
+    total_seconds = end_time - start_time
+    minutes = int(total_seconds // 60)
+    seconds = total_seconds % 60
+    
+    print("="*50)
+    print(f"⏱️ 任務結束！本次處理總共耗時: {minutes} 分 {seconds:.2f} 秒")
+    print("="*50)
 
 if __name__ == "__main__":
     main()

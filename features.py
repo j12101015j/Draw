@@ -508,7 +508,7 @@ def extract_features_for_image(image_path: str, base_out_dir: str, model=None, m
     bgr_raw = cv2.imread(image_path)
     if bgr_raw is None: raise ValueError(f"無法讀取圖片: {image_path}")
         
-    bgr = f_resize_image_1752(bgr_raw, 1752)
+    bgr = f_resize_image_1752(bgr_raw, 1752)  #改解析度
 
     mask = make_drawing_mask(bgr)
     skel = morphological_skeleton(mask)
