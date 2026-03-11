@@ -208,10 +208,26 @@ def main():
         
         # 寫入 Excel
         try:
+            from openpyxl.utils import get_column_letter
+            
+            # 定義一個自動調整欄寬的小工具
+            def autofit_columns(writer, dataframe, sheet_name):
+                worksheet = writer.sheets[sheet_name]
+                for idx, col in enumerate(dataframe.columns, 1):
+                    col_letter = get_column_letter(idx)
+                    # 找出該欄位內容或標題的最長字元數
+                    max_len = max(dataframe.iloc[:, idx-1].astype(str).map(len).max(), len(str(col)))
+                    # 因為中文字比較寬，所以乘上一個係數加上緩衝空間
+                    worksheet.column_dimensions[col_letter].width = max_len * 1.8 + 2
+
             with pd.ExcelWriter(out_xlsx, engine='openpyxl') as writer:
                 df.to_excel(writer, index=False, sheet_name='Features')
+                autofit_columns(writer, df, 'Features') # 🌟 呼叫自動欄寬
+                
             with pd.ExcelWriter(out_xlsx_cn, engine='openpyxl') as writer:
                 df_cn.to_excel(writer, index=False, sheet_name='Features')
+                autofit_columns(writer, df_cn, 'Features') # 🌟 呼叫自動欄寬
+                
             print(f"[INFO] 總表 XLSX (含中文版) 已儲存至 {out_xlsx} 與 {out_xlsx_cn}")
         except ModuleNotFoundError:
             df.to_excel(out_xlsx, index=False)

@@ -14,6 +14,7 @@ import argparse
 import os
 import math
 import csv
+import time  # 🌟 新增這行：匯入時間模組
 from collections import defaultdict
 from typing import List
 from pathlib import Path
@@ -24,34 +25,34 @@ from PIL import Image, ImageDraw, ImageOps
 # =========================
 # PARAMETERS (MUST match your v7)
 # =========================
-WHITE_DIST_THR = 70.0
+# --- 1. 背景與前處理 ---
+WHITE_DIST_THR = 70.0  # [背景過濾] 判斷背景(白紙)的RGB距離門檻。數值越大，越容易把淺色塗鴉誤認為白紙濾掉。
 
-QUANT_STEP = 8
+QUANT_STEP = 8  # [色彩量化] 初始顏色量化的步長。數字越大，一開始提取的顏色越少且越平滑，8 是適中的降噪值。
 
-SAT_THR = 30
-HUE_BIN_DEG = 18
+# --- 2. 彩色與灰階判定 ---
+SAT_THR = 30       # [飽和度門檻] 判斷是否為「彩色」的飽和度(S)下限。低於 30 會被視為灰階/黑色處理。
+HUE_BIN_DEG = 18   # [色相切塊] 初始將色相環(Hue)切塊的度數大小。18度代表將360度的色相環切成20等分。
 
-# Allow pale-but-colored strokes (e.g., light blue) to be treated as chromatic
-SAT_THR_LIGHT = 15
-V_LIGHT_MIN = 170
+# 針對「很亮但很淡」的顏色 (例如淡淡的淺藍色或粉紅色)，放寬飽和度限制，避免被當作灰色：
+SAT_THR_LIGHT = 15 # 放寬後的飽和度下限。
+V_LIGHT_MIN = 170  # 必須亮度(V)大於 170 才會套用上述放寬標準。
 
-GRAY_BINS = 4
+GRAY_BINS = 4      # [灰階切塊] 將非彩色的部分切成幾個明暗等級 (例如純黑、深灰、淺灰、白)。
 
-CORE_DIST = 1
-MIN_STROKE_AREA = 30
+# --- 3. 筆跡萃取與雜訊過濾 ---
+CORE_DIST = 1         # 尋找筆畫「核心」的內縮像素距離，用來避開筆跡邊緣的漸層雜訊與反鋸齒邊緣。
+MIN_STROKE_AREA = 30  # 連通區域的最小像素面積。小於 30 像素的微小筆畫一開始就會被徹底忽略。
 
-# Remove tiny scan speckles BEFORE color analysis (keeps palette/masks aligned)
-SPECKLE_AREA_MAX = 120    # remove components with area <= this AND very small bbox
-SPECKLE_DIM_MAX  = 6     # bbox width/height <= this considered speckle
+# [全局去雜訊] 在顏色分析前，去除掃描器產生的細小斑點：
+SPECKLE_AREA_MAX = 120   # 被判定為「掃描雜訊」的最大像素面積 (必須小於此值)。
+SPECKLE_DIM_MAX  = 6     # 該雜訊的邊界框長或寬必須小於此值 (避免誤刪小朋友畫的長條形細線)。
 
-# NEW: per-color mask cleanup (after color separation)
-# - removes tiny disconnected dots/scan speckles inside each color mask
-# - absorbs "darker outline" variants back into the main color when they are
-#   (a) same hue sector, (b) adjacent in image space, and (c) clearly just a darker shade.
-COLOR_SPECKLE_AREA_MAX = 160
-COLOR_SPECKLE_DIM_MAX  = 10
+# [各色去雜訊] 在顏色分離後，對「每個單獨的顏色遮罩」進行內部雜訊清理：
+COLOR_SPECKLE_AREA_MAX = 160  # 各顏色遮罩內部殘留孤立小點的最大清除面積。
+COLOR_SPECKLE_DIM_MAX  = 10   # 承上，孤立小點的長寬上限。
 
-
+# --- 4. 斷裂筆觸縫補 (確保線條完整性) ---
 # ---- NEW: mask connection/denoise for line completeness ----
 # 手繪線條常會因為筆壓/掃描造成「斷裂成碎片」；此步驟只在每個顏色 mask 內做非常輕微的連接與去雜訊。
 # 目標：線條更完整、碎片更少；不改變顏色分類本身。
@@ -60,13 +61,13 @@ MASK_CLOSE_KSIZE = 3          # 3=很保守；想更黏一點可改 5
 MASK_CLOSE_ITERS = 1          # 1=很保守；想更黏一點可改 2
 MASK_OPEN_KSIZE = 0           # 0=不做 opening；若小噪點很多可用 3
 MASK_OPEN_ITERS = 1
-# If a color mask is very small and looks like a darker outline next to a larger same-sector mask,
-# we absorb it back to reduce "edge artifacts".
-OUTLINE_ABSORB_MAX_PROP = 0.12   # only consider absorbing colors that occupy <= 12% of stroke pixels
-OUTLINE_ADJ_MIN_RATIO   = 0.55   # adjacency ratio (see function) required to absorb
-OUTLINE_DE_MAX          = 55.0   # Lab deltaE upper bound for absorption
-OUTLINE_RGB_DIST_MAX    = 95.0   # RGB distance upper bound for absorption
-OUTLINE_DV_MIN          = 18.0   # must be noticeably darker (V difference)
+# --- 5. 消除深色重疊邊緣 (Absorb outline variants) ---
+# 小朋友畫畫時邊緣用力塗抹會產生「深色輪廓」，將其吸收回主顏色中：
+OUTLINE_ABSORB_MAX_PROP = 0.12 # 被當作「深色輪廓」吸收的顏色，其佔比不能超過整張畫的 12%。
+OUTLINE_ADJ_MIN_RATIO   = 0.55 # 這個深色輪廓必須有 55% 的面積緊貼著主顏色，才會被吸收。
+OUTLINE_DE_MAX          = 55.0 # 被吸收的顏色與主顏色的 CIEDE2000 色差上限。
+OUTLINE_RGB_DIST_MAX    = 95.0 # 被吸收的顏色與主顏色的 RGB 距離上限。
+OUTLINE_DV_MIN          = 18.0 # 被吸收的顏色必須比主顏色「暗」至少 18 的亮度(V)。
 
 
 # NEW: 防止「超小顏色」被當成新色輸出（會造成一堆 mask_*）
@@ -76,6 +77,8 @@ OUTLINE_DV_MIN          = 18.0   # must be noticeably darker (V difference)
 MIN_COLOR_PROP = 0.01      # 0.2% 以下視為太小顏色（可調）
 MIN_COLOR_PIXELS = 600      # 像素數小於此也視為太小（可調）
 
+# --- 7. 強制保護機制 (避免關鍵小特徵被吞噬) ---
+# [強制保護黑色] (例如角落的簽名或編號)：
 # NEW: 黑色小字(例如左下角的小 1 / 2)常常像素很少，
 # 但我們希望它不要被當成雜訊或被比例門檻濾掉。
 # 只要在筆跡區域出現足夠「很黑」的像素，就強制把黑色加入 palette。
@@ -84,16 +87,13 @@ BLACK_V_MAX = 70            # HSV 的 V <= 70 視為黑（可調）
 BLACK_S_MAX = 80            # HSV 的 S <= 80（避免深色彩被當黑）
 MIN_BLACK_PIXELS = 40       # 黑色像素數 >= 這個才強制加入（可調）
 
-# --- NEW: black text ROI guard (prevents false black in images without real black strokes) ---
-# We only force/assign black when black-ish pixels appear in typical "label/text" regions (bottom corners).
-BLACK_TEXT_ROI_ENABLE = True
-BLACK_TEXT_ROI_X_FRAC = 0.25   # left/right margin fraction of width
-BLACK_TEXT_ROI_Y_FRAC = 0.25   # bottom margin fraction of height
+BLACK_TEXT_ROI_ENABLE = True # 是否只在圖片的特定區域(四個角落)強制尋找黑色文字。
+BLACK_TEXT_ROI_X_FRAC = 0.25 # 角落區域佔圖片寬度的比例 (0.25 = 左右各25%)。
+BLACK_TEXT_ROI_Y_FRAC = 0.25 # 角落區域佔圖片高度的比例 (0.25 = 底部25%)。
 
-# Additional component-level guard for black text candidates
-BLACK_COMP_MIN_AREA = 35        # per-component min area to be considered
-BLACK_COMP_MAX_BBOX_AREA = 8000 # reject big dark regions
-BLACK_COMP_MAX_DIM = 140        # reject extremely large connected dark areas
+BLACK_COMP_MIN_AREA = 35        # 黑字筆畫的最小面積。
+BLACK_COMP_MAX_BBOX_AREA = 8000 # 黑字邊界框的最大面積 (避免把巨大的黑影當作文字)。
+BLACK_COMP_MAX_DIM = 140        # 黑字的最大長寬限制。
 
 
 # NEW: 強制保留「紅色」(小面積也要保住，避免被黃/橘吸收)
@@ -123,14 +123,17 @@ RED_S_MIN = 80              # 飽和度至少要高，才算紅
 RED_V_MIN = 80              # 亮度至少要高，避免暗紅被當黑
 MIN_RED_PIXELS = 60         # 紅色像素數 >= 這個才強制加入（可調）
 
-HUE_THR_DEG = 10
-DE_THR_SAT = 40.0
-DE_THR_GRAY = 35.0
+# --- 8. 🌟 初始語意合併門檻 (決定顏色是否要分家的根源) ---
+HUE_THR_DEG = 18   #一般顏色的色相容忍度 (原本 10 太嚴格，改為 18 度以內視為同一支筆)。
+DE_THR_SAT = 40.0  # 初始顏色分群時，彩色與彩色的 deltaE 色差容忍度。
+DE_THR_GRAY = 35.0 # 初始顏色分群時，灰階與灰階的 deltaE 色差容忍度。
 
-SEMANTIC_DOM = 0.95
-SEMANTIC_DIST = 70.0
+# --- 9. 極端狀況處理 ---
+SEMANTIC_DOM = 0.95  # 當某單一顏色佔整張圖 95% 以上時，啟動極端合併模式 (通常發生在大面積塗黑的畫)。
+SEMANTIC_DIST = 70.0 # 極端合併模式下的 RGB 距離容忍度。
 
-TOP_K = 20  # increased to allow more distinct colors in clean palette images
+# --- 10. 輸出設定 ---
+TOP_K = 20  # 最終輸出的顏色種類上限 (最多只保留 20 種顏色，避免報表過度肥大)。OUT_CORE = "masked_core_dt.png"
 OUT_CORE = "masked_core_dt.png"
 OUT_PALETTE = "stroke_palette.png"
 
@@ -718,18 +721,16 @@ def despeckle_mask(fg255: np.ndarray) -> np.ndarray:
     m = (fg255 > 0).astype(np.uint8)
     num, labels, stats, _ = cv2.connectedComponentsWithStats(m, connectivity=8)
     keep = np.ones(num, dtype=bool)
-    keep[0] = True
+    keep[0] = False  # 🌟 背景不保留 (原程式這裡寫 True 但後面 out 沒畫，這裡統一改為標準寫法)
     for i in range(1, num):
         area = int(stats[i, cv2.CC_STAT_AREA])
         w = int(stats[i, cv2.CC_STAT_WIDTH])
         h = int(stats[i, cv2.CC_STAT_HEIGHT])
         if area <= int(SPECKLE_AREA_MAX) and w <= int(SPECKLE_DIM_MAX) and h <= int(SPECKLE_DIM_MAX):
             keep[i] = False
-    out = np.zeros_like(m)
-    for i in range(1, num):
-        if keep[i]:
-            out[labels == i] = 1
-    return (out * 255).astype(np.uint8)
+            
+    # 🌟 效能優化：使用 numpy 陣列映射瞬間完成，省去 N 次迴圈全圖掃描
+    return (keep[labels] * 255).astype(np.uint8)
 
 
 def _cleanup_small_components(mask255: np.ndarray, area_max: int, dim_max: int) -> np.ndarray:
@@ -746,18 +747,16 @@ def _cleanup_small_components(mask255: np.ndarray, area_max: int, dim_max: int) 
         return mask255
     num, labels, stats, _ = cv2.connectedComponentsWithStats(m, connectivity=8)
     keep = np.ones(num, dtype=bool)
-    keep[0] = True
+    keep[0] = False  # 🌟 背景不保留
     for i in range(1, num):
         area = int(stats[i, cv2.CC_STAT_AREA])
         w = int(stats[i, cv2.CC_STAT_WIDTH])
         h = int(stats[i, cv2.CC_STAT_HEIGHT])
         if area <= int(area_max) and w <= int(dim_max) and h <= int(dim_max):
             keep[i] = False
-    out = np.zeros_like(m)
-    for i in range(1, num):
-        if keep[i]:
-            out[labels == i] = 1
-    return (out * 255).astype(np.uint8)
+            
+    # 🌟 效能優化：使用 numpy 陣列映射瞬間完成
+    return (keep[labels] * 255).astype(np.uint8)
 
 
 def _adjacency_ratio(src255: np.ndarray, tgt255: np.ndarray, dilate_px: int = 2) -> float:
@@ -959,21 +958,45 @@ def run_algorithm(arr_rgb):
             if area < int(MIN_STROKE_AREA):
                 continue
 
-            comp = (labels == lab).astype(np.uint8) * 255
-            dist = cv2.distanceTransform(comp, cv2.DIST_L2, 3)
-            core = dist >= float(CORE_DIST)
-            if core.sum() == 0:
-                core = comp > 0
+            # 🌟 效能優化 ROI 裁切：只抓取筆畫所在的邊界框，不再掃描 300 萬像素
+            x, y, w, h = stats[lab, cv2.CC_STAT_LEFT], stats[lab, cv2.CC_STAT_TOP], stats[lab, cv2.CC_STAT_WIDTH], stats[lab, cv2.CC_STAT_HEIGHT]
+            
+            roi_labels = labels[y:y+h, x:x+w]
+            roi_comp = (roi_labels == lab).astype(np.uint8) * 255
+            
+            # 在極小的區域內算 distanceTransform，速度快上千倍
+            roi_dist = cv2.distanceTransform(roi_comp, cv2.DIST_L2, 3)
+            roi_core = roi_dist >= float(CORE_DIST)
+            if roi_core.sum() == 0:
+                roi_core = roi_comp > 0
 
-            dom = dominant_color_mode(arr_rgb[core], quant_step=max(1, QUANT_STEP))
-            px_mask = comp > 0
-            stroke_px = int(px_mask.sum())
-
+            roi_rgb = arr_rgb[y:y+h, x:x+w]
+            dom = dominant_color_mode(roi_rgb[roi_core], quant_step=max(1, QUANT_STEP))
+            
+            stroke_px = area
             color_accum[dom] += stroke_px
-            core_only[core] = arr_rgb[core]
-            comps.append((dom, px_mask))
+            
+            # 局部更新核心畫布
+            core_only[y:y+h, x:x+w][roi_core] = roi_rgb[roi_core]
+            
+            # 儲存區域座標與小遮罩，取代原本超級耗記憶體的大張 px_mask
+            comps.append((dom, roi_comp.copy(), x, y, w, h))
 
-    merged_counts, mapping = semantic_merge_with_mapping(dict(color_accum))
+    # 🌟 效能終極殺招：限制進入 O(N^2) 迴圈的顏色數量 🌟
+    sorted_colors = sorted(color_accum.items(), key=lambda x: x[1], reverse=True)
+    MAX_COLORS_TO_MERGE = 200 
+    
+    if len(sorted_colors) > MAX_COLORS_TO_MERGE:
+        main_colors = dict(sorted_colors[:MAX_COLORS_TO_MERGE])
+        merged_counts, mapping = semantic_merge_with_mapping(main_colors)
+        
+        top_1_rgb = sorted_colors[0][0]
+        for rgb, cnt in sorted_colors[MAX_COLORS_TO_MERGE:]:
+            mapping[rgb] = top_1_rgb
+            merged_counts[top_1_rgb] = merged_counts.get(top_1_rgb, 0) + cnt
+    else:
+        merged_counts, mapping = semantic_merge_with_mapping(dict(color_accum))
+    # ========================================================
     merged_counts, mapping = semantic_collapse_with_mapping(merged_counts, mapping)
     merged_counts, mapping = merge_tiny_into_big_with_mapping(merged_counts, mapping)
     # ---- BLACK TEXT FIX (v8_15_3): conservative black-text forcing (no extra algorithm changes) ----
@@ -1084,13 +1107,14 @@ def run_algorithm(arr_rgb):
 
     top_rgbs = [rgb for rgb, _ in palette]
     masks_by_color = {rgb: np.zeros(arr_rgb.shape[:2], dtype=np.uint8) for rgb in top_rgbs}
-    for dom, px_mask in comps:
+    # 🌟 配合 ROI，將小遮罩貼回正確的座標位置
+    for dom, roi_comp, x, y, w, h in comps:
         final_rgb = mapping.get(dom, dom)
         if top_rgbs and final_rgb not in masks_by_color:
             d = [rgb_dist(final_rgb, tr) for tr in top_rgbs]
             final_rgb = top_rgbs[int(np.argmin(d))]
         if final_rgb in masks_by_color:
-            masks_by_color[final_rgb][px_mask] = 255
+            masks_by_color[final_rgb][y:y+h, x:x+w][roi_comp > 0] = 255
     # ---- BLACK TEXT FIX: assign detected black-text pixels into black mask (only for those candidate pixels) ----
     if FORCE_BLACK and (black_text_bool is not None):
         black_cnt = int(black_text_bool.sum())
@@ -1367,18 +1391,24 @@ def get_color_name(rgb):
             best_name = name
     return best_name
 
-def process_one(in_path: str, out_base: str):
+# 將參數名稱改為 input_data，它可以是字串(路徑)或陣列
+def process_one(input_data, out_base: str):
     os.makedirs(out_base, exist_ok=True)
 
-    # === 修改這裡 ===
-    img = Image.open(in_path)            # 1. 讀取
-    img = ImageOps.exif_transpose(img)   # 2. 自動轉正
-    img = img.convert("RGB")             # 3. 轉為 RGB
-    # ===============
-
-    arr = np.array(img, dtype=np.uint8)
+    # 🌟 雙模式自動偵測
+    if isinstance(input_data, str):
+        # 【模式 A】單獨執行 color.py 時：傳入的是字串路徑，自己去硬碟讀圖
+        img = Image.open(input_data)
+        img = ImageOps.exif_transpose(img)
+        img = img.convert("RGB")
+        arr = np.array(img, dtype=np.uint8)
+    else:
+        # 【模式 B】被 features.py 呼叫時：傳入的是已經降解好的 BGR 陣列
+        arr = cv2.cvtColor(input_data, cv2.COLOR_BGR2RGB)
 
     palette, core_only, fg, masks_by_color = run_algorithm(arr)
+    
+    # ... (下面原本的 merge_masks_by_ciede2000 等等程式碼完全不要動) ...
 
     # NEW: merge masks after they are created (does NOT change color detection)
     palette, masks_by_color = merge_masks_by_ciede2000(
@@ -1409,16 +1439,11 @@ def process_one(in_path: str, out_base: str):
     # ---- NEW: 回傳代表色給主程式寫入 CSV ----
     return palette
 
+
 # ==========================================
 # 供總檔 features4.py 呼叫的介面
 # ==========================================
-# ==========================================
-# 供總檔 features4.py 呼叫的介面
-# ==========================================
-# ==========================================
-# 供總檔 features4.py 呼叫的介面
-# ==========================================
-def run_color_feature(image_path, img_name, base_out_dir, verbose=False):
+def run_color_feature(img_bgr, img_name, base_out_dir, verbose=False):    
     from pathlib import Path
     import os
     import csv
@@ -1445,9 +1470,9 @@ def run_color_feature(image_path, img_name, base_out_dir, verbose=False):
     # 如果 verbose 為 False，就進入靜音模式執行演算法
     if not verbose:
         with SuppressPrint():
-            pal = process_one(str(image_path), str(img_out_dir))
+            pal = process_one(img_bgr, str(img_out_dir)) 
     else:
-        pal = process_one(str(image_path), str(img_out_dir))
+        pal = process_one(img_bgr, str(img_out_dir))
 
     if not pal:
         return 0, "", "", {}
@@ -1489,12 +1514,14 @@ def run_color_feature(image_path, img_name, base_out_dir, verbose=False):
 
 
 # ==========================================
-# 單檔執行邏輯 (已修正 --output 參數)
+# 單檔執行邏輯
 # ==========================================
 def main():
+    # 🌟 1. 記錄開始時間
+    start_time = time.time()
+
     parser = argparse.ArgumentParser(description="Image Color Analysis")
     parser.add_argument("-i", "--input", required=True, help="Path to the input image or directory")
-    # 將這裡改為 --output 配合你的需求
     parser.add_argument("-o", "--output", required=True, help="Directory to save output files")
     args = parser.parse_args()
 
@@ -1506,8 +1533,10 @@ def main():
         stem = Path(input_path).stem
         img_out_dir = os.path.join(out_base, stem)
         os.makedirs(img_out_dir, exist_ok=True)
+        t0 = time.time()  # 🌟 新增碼錶起點
         print(f"\n--- Processing {input_path} ---")
         pal = process_one(input_path, img_out_dir)
+        print(f"  -> 此圖色彩分析耗時: {time.time() - t0:.2f} 秒")  # 🌟 新增印出耗時
         
         global_csv_path = os.path.join(out_base, "global_colors_summary.csv")
         with open(global_csv_path, "w", encoding="utf-8-sig", newline="") as f:
@@ -1538,7 +1567,9 @@ def main():
                 os.makedirs(img_out_dir, exist_ok=True)
                 
                 print(f"\n--- Processing {file_path} ---")
+                t0 = time.time()  # 🌟 新增碼錶起點
                 pal = process_one(file_path, img_out_dir)
+                print(f"  -> 此圖色彩分析耗時: {time.time() - t0:.2f} 秒")  # 🌟 新增印出耗時
                 
                 if pal:
                     count = len(pal)
@@ -1550,5 +1581,18 @@ def main():
 
         print(f"\n已生成全域顏色統計表: {global_csv_path}")
 
+    # 🌟 2. 結算時間並印出
+    end_time = time.time()
+    total_seconds = end_time - start_time
+    minutes = int(total_seconds // 60)
+    seconds = total_seconds % 60
+    
+    print("="*50)
+    print(f"⏱️ color.py 分析結束！本次處理總共耗時: {minutes} 分 {seconds:.2f} 秒")
+    print("="*50)
+
 if __name__ == '__main__':
     main()
+
+
+

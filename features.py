@@ -12,6 +12,7 @@ import cv2
 import numpy as np
 import os
 import math
+import time
 from collections import defaultdict
 import collections
 
@@ -61,20 +62,6 @@ def f_resize_image_1752(image: np.ndarray, target_size: int = 1752) -> np.ndarra
     resized = cv2.resize(image, (new_w, new_h), interpolation=interpolation)
     return resized
 
-def make_drawing_mask(bgr: np.ndarray) -> np.ndarray:
-    hsv = cv2.cvtColor(bgr, cv2.COLOR_BGR2HSV)
-    S = hsv[..., 1]
-    V = hsv[..., 2]
-    color_mask = S > 30
-    dark_mask = V < 180
-    mask = np.logical_or(color_mask, dark_mask).astype(np.uint8) * 255
-    kernel = np.ones((3,3), np.uint8)
-    mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
-    mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
-    return mask
-
-def morphological_skeleton(mask_255: np.ndarray) -> np.ndarray:
-    return cv2.ximgproc.thinning(mask_255)
 
 def f_preprocess_bina_sk(bgr, img_name, base_out_dir):
     out_dir = os.path.join(base_out_dir, "bina_sk")
@@ -500,69 +487,177 @@ def _write_word_csv(img_name, word_str, word_dir):
 
 
 # =======================================================
-# 主控流程：資料字典寫入順序嚴格對齊 1~16
+# 主控流程：資料字典寫入順序嚴格對齊 1~16 (無測速版)
 # =======================================================
+# def extract_features_for_image(image_path: str, base_out_dir: str, model=None, mood_model=None, word_model=None) -> FeatureResult:
+#     img_name = os.path.basename(image_path)
+#     bgr_raw = cv2.imread(image_path)
+#     if bgr_raw is None: raise ValueError(f"無法讀取圖片: {image_path}")
+        
+#     # [步驟 1] 降解析度至1752
+#     bgr = f_resize_image_1752(bgr_raw, 1752)
 
+#     # [步驟 2] 前處理 (bina_sk.py) <-- 🌟 原本的步驟三往前推
+#     binary_mask, structure_mask = f_preprocess_bina_sk(bgr, img_name, base_out_dir)
+#     success, encoded_img = cv2.imencode('.png', structure_mask)
+#     clean_structure_mask = cv2.imdecode(encoded_img, cv2.IMREAD_COLOR) if success else structure_mask.copy()
+
+#     # [步驟 3] 面積、陰影與九宮格計算
+#     d_ratio, topo_area, paper_area, r_draw = f_drawing_area_ratio(binary_mask, img_name, base_out_dir)
+#     s_count, paint_area, r_shadow_cnt = f_shadow_region_count(clean_structure_mask, binary_mask, img_name, base_out_dir)
+#     binary_area = int(np.count_nonzero(binary_mask))
+#     s_ratio, r_shadow_ratio = f_shadow_area_ratio(paint_area, binary_area)
+#     res_tuple, r_region = f_drawing_region_3x3(bgr, binary_mask, img_name, base_out_dir)
+
+#     # [步驟 4] 色彩分析
+#     c_count, rgb_s, name_s, r_color = color.run_color_feature(bgr, img_name, base_out_dir, verbose=False)
+
+#     # [步驟 5] YOLO 內容與面積
+#     c_str, yolo_results = f_yolo_content(image_path, model, base_out_dir, bgr)
+#     c_all_str, c_paper_str, r_yolo_size = f_content_size(yolo_results, model, paper_area)
+
+#     # =================初始化字典=================
+#     row = {}; raw_all = {}
+#     row["image"] = img_name
+    
+#     # 🌟 修改點：【序號 1】紙張方向改成吃 binary_mask
+#     v, r = f_paper_orientation(binary_mask); row["paper_orientation"] = v; raw_all["paper_orientation"] = r
+    
+#     # [步驟 6] 弧度
+#     v, r = f_curvature_angle(clean_structure_mask, img_name, base_out_dir); row["curvature"] = v; raw_all["curvature"] = r
+    
+#     # [步驟 7] 流暢度
+#     v, r = f_line_smoothness_fluency(clean_structure_mask, img_name, base_out_dir); row["line_smoothness"] = v; raw_all["line_smoothness"] = r
+    
+#     # [步驟 8] 粗細
+#     v, r = f_line_thickness(clean_structure_mask, binary_mask, img_name, base_out_dir); row["line_thickness"] = v; raw_all["line_thickness"] = r
+
+#     row["colors_rgb"] = rgb_s; row["colors_name"] = name_s; row["color_count"] = c_count; raw_all["drawing_colors"] = r_color
+#     row["shadow_area_ratio"] = s_ratio; raw_all["shadow_area_ratio"] = r_shadow_ratio
+#     row["shadow_region_count"] = s_count; raw_all["shadow_region_count"] = r_shadow_cnt
+#     row["drawing_region_main"] = res_tuple[0]; row["drawing_region_covered"] = res_tuple[1]; raw_all["drawing_region_3x3"] = r_region
+#     row["drawing_area_ratio"] = d_ratio; raw_all["drawing_area_ratio"] = r_draw
+    
+#     # 🌟 修改點：【序號 11】繪畫力度(筆觸深淺) 改成吃 binary_mask
+#     v, r = f_stroke_depth_score(bgr, binary_mask); row["stroke_depth"] = v; raw_all["stroke_depth"] = r
+    
+#     row["content"] = c_str; raw_all["content"] = "Done" 
+#     row["content_size_all"] = c_all_str; row["content_size_paper"] = c_paper_str; raw_all["content_size"] = r_yolo_size
+    
+#     # [步驟 9] YOLO 動態、情緒、文字
+#     dyn_score_str, r_dyn = f_dynamic(yolo_results, model, img_name, base_out_dir)
+#     row["dynamic"] = dyn_score_str; raw_all["dynamic"] = r_dyn
+    
+#     mood_score, r_mood = f_yolo_mood(image_path, mood_model, base_out_dir, bgr, img_name)
+#     row["emotion"] = mood_score; raw_all["emotion"] = r_mood
+    
+#     word_str, r_word = f_yolo_word(image_path, word_model, base_out_dir, bgr, img_name)
+#     row["word"] = word_str; raw_all["word"] = r_word
+
+#     # 🌟 修改點：將原始輸出的 mask 替換為 binary_mask，並徹底刪除 skeleton 的紀錄
+#     raw_all["mask"] = {"drawing_pixels": int(np.count_nonzero(binary_mask)), "paper_pixels": int(binary_mask.size)}
+
+#     return FeatureResult(row=row, raw=raw_all)
+
+
+# =======================================================
+# 主控流程：資料字典寫入順序嚴格對齊 1~16 (加入測速碼錶)
+# =======================================================
 def extract_features_for_image(image_path: str, base_out_dir: str, model=None, mood_model=None, word_model=None) -> FeatureResult:
     img_name = os.path.basename(image_path)
-    bgr_raw = cv2.imread(image_path)
+    
+    print(f"\n--- ⏱️ 開始測量各步驟時間: {img_name} ---")
+    time_log = {} # 建立碼錶紀錄本
+    t_start_all = time.time()
+    
+    # [步驟 1] 讀圖與降解析度
+    t0 = time.time()
+    bgr_raw = load_image_bgr(image_path)
     if bgr_raw is None: raise ValueError(f"無法讀取圖片: {image_path}")
-        
-    bgr = f_resize_image_1752(bgr_raw, 1752)  #改解析度
+    bgr = f_resize_image_1752(bgr_raw, 1752)
+    time_log['01_降解析度至1752'] = time.time() - t0
 
-    mask = make_drawing_mask(bgr)
-    skel = morphological_skeleton(mask)
-
+    # [步驟 2] 前處理 (bina_sk.py) <-- 🌟 原本的步驟三往前推
+    t0 = time.time()
     binary_mask, structure_mask = f_preprocess_bina_sk(bgr, img_name, base_out_dir)
     success, encoded_img = cv2.imencode('.png', structure_mask)
     clean_structure_mask = cv2.imdecode(encoded_img, cv2.IMREAD_COLOR) if success else structure_mask.copy()
+    time_log['02_前處理 (bina_sk.py)'] = time.time() - t0
 
-    # --- 預先計算 CV ---
+    # [步驟 3] 面積、陰影與九宮格計算
+    t0 = time.time()
     d_ratio, topo_area, paper_area, r_draw = f_drawing_area_ratio(binary_mask, img_name, base_out_dir)
     s_count, paint_area, r_shadow_cnt = f_shadow_region_count(clean_structure_mask, binary_mask, img_name, base_out_dir)
     binary_area = int(np.count_nonzero(binary_mask))
     s_ratio, r_shadow_ratio = f_shadow_area_ratio(paint_area, binary_area)
     res_tuple, r_region = f_drawing_region_3x3(bgr, binary_mask, img_name, base_out_dir)
-    c_count, rgb_s, name_s, r_color = color.run_color_feature(image_path, img_name, base_out_dir, verbose=False)
+    time_log['03_面積與陰影計算'] = time.time() - t0
 
-    # === 呼叫 YOLO ===
+    # [步驟 4] 色彩分析
+    t0 = time.time()
+    c_count, rgb_s, name_s, r_color = color.run_color_feature(bgr, img_name, base_out_dir, verbose=False)
+    time_log['04_色彩分析 (color.py)'] = time.time() - t0
+
+    # [步驟 5] YOLO 內容與面積
+    t0 = time.time()
     c_str, yolo_results = f_yolo_content(image_path, model, base_out_dir, bgr)
     c_all_str, c_paper_str, r_yolo_size = f_content_size(yolo_results, model, paper_area)
+    time_log['05_YOLO內容辨識'] = time.time() - t0
 
-    # === 初始化字典 ===
-    row = {}
-    raw_all = {}
-
+    # =================初始化字典=================
+    row = {}; raw_all = {}
     row["image"] = img_name
-
-    v, r = f_paper_orientation(mask); row["paper_orientation"] = v; raw_all["paper_orientation"] = r
-    v, r = f_curvature_angle(clean_structure_mask, img_name, base_out_dir); row["curvature"] = v; raw_all["curvature"] = r
-    v, r = f_line_smoothness_fluency(clean_structure_mask, img_name, base_out_dir); row["line_smoothness"] = v; raw_all["line_smoothness"] = r
-    v, r = f_line_thickness(clean_structure_mask, binary_mask, img_name, base_out_dir); row["line_thickness"] = v; raw_all["line_thickness"] = r
-
+    
+    # 🌟 修改點：【序號 1】紙張方向改成吃 binary_mask
+    v, r = f_paper_orientation(binary_mask); row["paper_orientation"] = v; raw_all["paper_orientation"] = r
     row["colors_rgb"] = rgb_s; row["colors_name"] = name_s; row["color_count"] = c_count; raw_all["drawing_colors"] = r_color
     row["shadow_area_ratio"] = s_ratio; raw_all["shadow_area_ratio"] = r_shadow_ratio
     row["shadow_region_count"] = s_count; raw_all["shadow_region_count"] = r_shadow_cnt
     row["drawing_region_main"] = res_tuple[0]; row["drawing_region_covered"] = res_tuple[1]; raw_all["drawing_region_3x3"] = r_region
     row["drawing_area_ratio"] = d_ratio; raw_all["drawing_area_ratio"] = r_draw
-    v, r = f_stroke_depth_score(bgr, mask); row["stroke_depth"] = v; raw_all["stroke_depth"] = r
-
+    
+    # 🌟 修改點：【序號 11】繪畫力度(筆觸深淺) 改成吃 binary_mask
+    v, r = f_stroke_depth_score(bgr, binary_mask); row["stroke_depth"] = v; raw_all["stroke_depth"] = r
+    
     row["content"] = c_str; raw_all["content"] = "Done" 
     row["content_size_all"] = c_all_str; row["content_size_paper"] = c_paper_str; raw_all["content_size"] = r_yolo_size
+    
+    # [步驟 6] 弧度
+    t0 = time.time()
+    v, r = f_curvature_angle(clean_structure_mask, img_name, base_out_dir); row["curvature"] = v; raw_all["curvature"] = r
+    time_log['06_弧度分析 (angle.py)'] = time.time() - t0
 
-    # 【序號 14】動態性
+    # [步驟 7] 流暢度
+    t0 = time.time()
+    v, r = f_line_smoothness_fluency(clean_structure_mask, img_name, base_out_dir); row["line_smoothness"] = v; raw_all["line_smoothness"] = r
+    time_log['07_流暢度 (fluency.py)'] = time.time() - t0
+
+    # [步驟 8] 粗細
+    t0 = time.time()
+    v, r = f_line_thickness(clean_structure_mask, binary_mask, img_name, base_out_dir); row["line_thickness"] = v; raw_all["line_thickness"] = r
+    time_log['08_粗細分析 (thickness.py)'] = time.time() - t0
+
+    # [步驟 9] YOLO 動態、情緒、文字
+    t0 = time.time()
     dyn_score_str, r_dyn = f_dynamic(yolo_results, model, img_name, base_out_dir)
     row["dynamic"] = dyn_score_str; raw_all["dynamic"] = r_dyn
-
-    # 【序號 15】情緒 (emotion)
     mood_score, r_mood = f_yolo_mood(image_path, mood_model, base_out_dir, bgr, img_name)
     row["emotion"] = mood_score; raw_all["emotion"] = r_mood
-
-    # 【序號 16】文字 (word)
     word_str, r_word = f_yolo_word(image_path, word_model, base_out_dir, bgr, img_name)
     row["word"] = word_str; raw_all["word"] = r_word
+    time_log['09_YOLO其他(動態/情緒/文字)'] = time.time() - t0
 
-    raw_all["mask"] = {"drawing_pixels": int(np.count_nonzero(mask)), "paper_pixels": int(mask.size)}
-    raw_all["skeleton"] = {"skeleton_pixels": int(np.count_nonzero(skel))}
+    # 🌟 修改點：將原始輸出的 mask 替換為 binary_mask，並徹底刪除 skeleton 的紀錄
+    raw_all["mask"] = {"drawing_pixels": int(np.count_nonzero(binary_mask)), "paper_pixels": int(binary_mask.size)}
+
+    # === 強制釋放巨大圖片變數 (拿掉用不到的 mask 和 skel) ===
+    del bgr_raw, bgr, binary_mask, clean_structure_mask
+
+    # 結算並印出報告
+    total_t = time.time() - t_start_all
+    print(f"   === 測速報告: {img_name} ===")
+    for k, v in sorted(time_log.items()):
+        print(f"   [{k}]: {v:.2f} 秒")
+    print(f"   >>> 此圖總耗時: {total_t:.2f} 秒 <<<\n")
 
     return FeatureResult(row=row, raw=raw_all)

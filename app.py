@@ -262,6 +262,15 @@ if st.session_state.is_processing and not st.session_state.stop_requested:
                     st.error(f"圖片 {img_name} 處理失敗: {e}")
                 
                 progress_bar.progress((i + 1) / total_images)
+                # ==========================================
+                # 🌟 補上：強制記憶體大掃除 (防爆機制)
+                # 每跑完一張圖，立刻把幾百MB的暫存矩陣殺掉
+                # ==========================================
+                import gc
+                gc.collect()
+                if has_gpu:
+                    torch.cuda.empty_cache()
+                # ==========================================
                 
             if not st.session_state.stop_requested:
                 # 🌟 結算時間
