@@ -566,7 +566,7 @@ def _write_word_csv(img_name, word_str, word_dir):
 def extract_features_for_image(image_path: str, base_out_dir: str, model=None, mood_model=None, word_model=None) -> FeatureResult:
     img_name = os.path.basename(image_path)
     
-    print(f"\n--- ⏱️ 開始測量各步驟時間: {img_name} ---")
+    print(f"\n---  開始測量各步驟時間: {img_name} ---")
     time_log = {} # 建立碼錶紀錄本
     t_start_all = time.time()
     
