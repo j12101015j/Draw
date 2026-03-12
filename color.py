@@ -474,6 +474,8 @@ def draw_palette_bar(colors_with_prop, out_path, w=900, h=120):
 
     x = 0
     for rgb, p in colors_with_prop:
+        if x >= w:            # 🌟 新增防呆：如果 x 已經超過或等於圖片寬度，就立刻停止
+            break
         bw = int(round(p * w))
         if bw <= 0:
             continue

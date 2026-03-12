@@ -5,6 +5,7 @@ import tempfile
 import pandas as pd
 import zipfile
 import py7zr
+import traceback
 import psutil
 import torch
 import rarfile
@@ -260,7 +261,7 @@ if st.session_state.is_processing and not st.session_state.stop_requested:
                         rows_cn.append(row_cn)
                 except Exception as e:
                     st.error(f"圖片 {img_name} 處理失敗: {e}")
-                
+                    st.code(traceback.format_exc()) # 🌟 這裡會把具體錯在哪一行印在網頁上！
                 progress_bar.progress((i + 1) / total_images)
                 # ==========================================
                 # 🌟 補上：強制記憶體大掃除 (防爆機制)

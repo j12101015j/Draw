@@ -491,7 +491,7 @@ def _write_word_csv(img_name, word_str, word_dir):
 # =======================================================
 # def extract_features_for_image(image_path: str, base_out_dir: str, model=None, mood_model=None, word_model=None) -> FeatureResult:
 #     img_name = os.path.basename(image_path)
-#     bgr_raw = cv2.imread(image_path)
+#     bgr_raw = load_image_bgr(image_path)
 #     if bgr_raw is None: raise ValueError(f"無法讀取圖片: {image_path}")
         
 #     # [步驟 1] 降解析度至1752
