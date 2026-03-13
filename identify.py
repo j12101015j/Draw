@@ -186,7 +186,9 @@ def main():
             }
             rows_cn.append(row_cn)
             
-            raw_json[img_name] = res.raw
+            #raw_json[img_name] = res.raw
+            #raw_json[img_name] = res.row  # 改成 res.row，就會跟 features.csv 裡面的英文欄位一模一樣！
+            raw_json[img_name] = row_cn   # 改成 row_cn，就會吐出帶有中文 Key 的 JSON！
             print(f"[OK] 分析完成")
         except Exception as e:
             print(f"[ERROR] 處理失敗 {img_name}: {e}")
